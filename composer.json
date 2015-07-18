@@ -1,0 +1,19 @@
+{
+	"name": "rougin/transcribe",
+    "description": "Yet another language library for PHP",
+    "keywords": ["language", "transcribe", "php"],
+    "require": {
+        "slim/pdo": "*"
+    },
+    "authors": [
+        {
+            "name": "Rougin Gutib",
+            "email": "rougingutib@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rougin\\Transcribe\\": "src/"
+        }
+    }
+}
