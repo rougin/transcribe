@@ -5,6 +5,7 @@
     "require": {
         "slim/pdo": "*"
     },
+    "license": "MIT",
     "authors": [
         {
             "name": "Rougin Gutib",
