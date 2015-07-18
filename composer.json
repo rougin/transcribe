@@ -1,5 +1,5 @@
 {
-	"name": "rougin/transcribe",
+    "name": "rougin/transcribe",
     "description": "Yet another language library for PHP",
     "keywords": ["language", "transcribe", "php"],
     "require": {
