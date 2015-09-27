@@ -49,6 +49,9 @@ The contents of the **word** table
 | fil_PH        | school        | paaralan     |
 
 ``` php
+use Rougin\Transcribe\Source\DatabaseSource;
+use Rougin\Transcribe\Transcribe;
+
 $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
 
 // Properties of the table you want to access
@@ -89,8 +92,11 @@ $transcribe = new Transcribe($source);
 #### Getting a text from the *vocabulary*
 
 ``` php
-$transcribe->getVocabulary(); // Returns all stored texts
-$translation->getText('fil_PH.name'); // Returns translation of 'name' in 'fil_PH' group
+// Returns all stored texts
+$transcribe->getVocabulary();
+
+// Returns translation of 'name' in 'fil_PH' group
+$translation->getText('fil_PH.name');
 ```
 
 #### Adding new source
