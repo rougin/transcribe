@@ -1,57 +1,45 @@
 # Transcribe
 
-[![Latest Stable Version](https://poser.pugx.org/rougin/transcribe/v/stable)](https://packagist.org/packages/rougin/transcribe) [![Total Downloads](https://poser.pugx.org/rougin/transcribe/downloads)](https://packagist.org/packages/rougin/transcribe) [![Latest Unstable Version](https://poser.pugx.org/rougin/transcribe/v/unstable)](https://packagist.org/packages/rougin/transcribe) [![License](https://poser.pugx.org/rougin/transcribe/license)](https://packagist.org/packages/rougin/transcribe)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
 
 Yet another language library for PHP
 
-# Installation
+## Install
 
-Install ```Transcribe``` via [Composer](https://getcomposer.org):
+Via Composer
 
-```$ composer require rougin/transcribe```
+``` bash
+$ composer require rougin/transcribe
+```
 
-# Usage
+## Usage
 
-### Load a list of texts from a directory
+#### Load a list of texts from a directory
 
 **locales/fil_PH.php**
 
-```php
+``` php
 return array(
-	'name' => 'pangalan',
-	'language' => 'linguahe',
-	'school' => 'paaralan'
+    'name' => 'pangalan',
+    'language' => 'linguahe',
+    'school' => 'paaralan'
 );
 ```
 
-**index.php**
-
-```php
-require 'vendor/autoload.php';
-
+``` php
+use Rougin\Transcribe\Source\DirectorySource;
 use Rougin\Transcribe\Transcribe;
 
-$transcribe = new Transcribe('locales');
-
-print_r($transcribe->getVocabulary());
+$directory = new DirectorySource(__DIR__ . '/locales');
+$transcribe = new Transcribe($directory);
 ```
 
-**Result**
-
-```bash
-Array
-(
-    [fil_PH] => Array
-        (
-            [name] => pangalan
-            [language] => linguahe
-            [school] => paaralan
-        )
-
-)
-```
-
-### Load a list of texts from a database
+#### Load a list of texts from a database
 
 The contents of the **word** table
 
@@ -60,76 +48,93 @@ The contents of the **word** table
 | fil_PH        | name          | pangalan     |
 | fil_PH        | school        | paaralan     |
 
-**index.php**
+``` php
+$pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
 
-```php
-require 'vendor/autoload.php';
+// Properties of the table you want to access
+$table = [
+    // Name of the table
+    'name' => 'word',
 
+    // Language name based from a locale (e.g en_GB) or just group of words
+    'language' => 'language',
+
+    // A keyword or a text to be translated
+    'text' => 'text',
+
+    // The translation from the based language
+    'translation' => 'translation'
+];
+
+$database = new DatabaseSource($pdo, $table);
+$transcribe = new Transcribe($database);
+```
+
+#### Load list of texts from different sources
+
+``` php
+use Rougin\Transcribe\Source\MultipleSource;
 use Rougin\Transcribe\Transcribe;
 
-/**
- * Database credentials
- */
+$source = new MultipleSource;
 
-$credentials = array(
-	'driver' => 'mysql',
-	'hostname' => 'localhost',
-	'database' => 'demo',
-	'charset' => 'utf8',
-	'username' => 'root',
-	'password' => '',
-);
+// Let's use $database and $directory from above as the example
+$source
+    ->addSource($database)
+    ->addSource($directory);
 
-/**
- * Name of the table and its corresponding columns
- * If not specified, the default columns are:
- *     language -> Language name based from a locale (e.g en_GB, en_US)
- *          or just group of words
- *     text -> A keyword or a text to be translated
- *     translation -> The translation from the based language
- */
-
-$table = array(
-	'name' => 'word',
-	'language' => 'language',
-	'text' => 'text',
-	'translation' => 'translation'
-);
-
-$transcribe = new Transcribe($credentials, $table);
-
-print_r($transcribe->getVocabulary());
+$transcribe = new Transcribe($source);
 ```
 
-**Result**
+#### Getting a text from the *vocabulary*
 
-```bash
-Array
-(
-    [fil_PH] => Array
-        (
-            [name] => pangalan
-            [school] => paaralan
-        )
-)
-```
-
-### Load list of texts from different sources
-
-**index.php**
-
-```php
-$transcribe = new Transcribe($credentials, $table);
-$transcribe->getDirectory('locale')
-	->getDirectory('another/directory')
-	->getDatabase($anotherCredentials, $table);
-```
-
-### Getting a text from the *vocabulary*
-
-**index.php**
-
-```php
+``` php
 $transcribe->getVocabulary(); // Returns all stored texts
 $translation->getText('fil_PH.name'); // Returns translation of 'name' in 'fil_PH' group
 ```
+
+#### Adding new source
+
+You can always add a new source if you want. Just implement the source of your choice in a [SourceInterface](https://github.com/rougin/transcribe/blob/master/src/Source/SourceInterface.php).
+
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Testing
+
+``` bash
+$ composer test
+```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security related issues, please email rougingutib@gmail.com instead of using the issue tracker.
+
+## Credits
+
+- [Rougin Royce Gutib][link-author]
+- [All Contributors][link-contributors]
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/rougin/transcribe.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/rougin/transcribe/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/rougin/transcribe.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/rougin/transcribe.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/rougin/transcribe.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/rougin/transcribe
+[link-travis]: https://travis-ci.org/rougin/transcribe
+[link-scrutinizer]: https://scrutinizer-ci.com/g/rougin/transcribe/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/rougin/transcribe
+[link-downloads]: https://packagist.org/packages/rougin/transcribe
+[link-author]: https://github.com/rougin
+[link-contributors]: ../../contributors
