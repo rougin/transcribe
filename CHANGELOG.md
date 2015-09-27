@@ -5,7 +5,7 @@ All Notable changes to `Transcribe` will be documented in this file
 ## [0.2.0](https://github.com/rougin/transcribe/compare/v0.1.1...v0.2.0) - 2015-09-27
 
 ### Added
-- [Source](https://github.com/rougin/transcribe/src/Source) interfaces
+- [Source](https://github.com/rougin/transcribe/tree/master/src/Source) directory for handling data from different sources
 
 ### Fixed
 - Code structure
