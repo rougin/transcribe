@@ -2,6 +2,11 @@
 
 All Notable changes to `Transcribe` will be documented in this file
 
+## [0.2.1](https://github.com/rougin/transcribe/compare/v0.2.0...v0.2.1) - 2015-09-30
+
+### Added
+- [MultiArray](https://github.com/tebru/multi-array) for handling multidimensional arrays
+
 ## [0.2.0](https://github.com/rougin/transcribe/compare/v0.1.1...v0.2.0) - 2015-09-27
 
 ### Added

@@ -3,6 +3,7 @@
 namespace Rougin\Transcribe;
 
 use Rougin\Transcribe\Source\SourceInterface;
+use Tebru\MultiArray;
 
 /**
  * Transcribe
@@ -34,17 +35,10 @@ class Transcribe
      */
     public function getText($string = '')
     {
-        $group = '';
+        $multiArray = new MultiArray($this->vocabulary);
+        $result = $multiArray->get($string);
 
-        if (strpos($string, '.') !== FALSE) {
-            list($group, $string) = explode('.', $string);
-        }
-
-        if (! isset($this->vocabulary[$group][$string])) {
-            return $string;
-        }
-
-        return $this->vocabulary[$group][$string];
+        return (is_string($result)) ? $result : $string;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/rougin/slytherin).
+We accept contributions via Pull Requests on [Github](https://github.com/rougin/transcribe).
 
 ## Pull Requests
 
@@ -20,12 +20,10 @@ We accept contributions via Pull Requests on [Github](https://github.com/rougin/
 
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
 
-
 ## Running Tests
 
 ``` bash
 $ composer test
 ```
-
 
 **Happy coding**!
