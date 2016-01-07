@@ -5,7 +5,7 @@ namespace Rougin\Transcribe\Source;
 /**
  * Source Interface
  *
- * An interface that gets a list of words from various sources
+ * An interface that gets a list of words from various sources.
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>

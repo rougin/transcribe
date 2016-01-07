@@ -8,14 +8,23 @@ use Tebru\MultiArray;
 /**
  * Transcribe
  *
- * Yet another language library for PHP
+ * Yet another language library for PHP.
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class Transcribe
 {
+    /**
+     * @var \Rougin\Transcribe\Source\SourceInterface
+     */
     protected $source;
+
+    /**
+     * List of words.
+     * 
+     * @var array
+     */
     protected $vocabulary = [];
 
     /**
@@ -42,7 +51,7 @@ class Transcribe
     }
 
     /**
-     * Gets all words stored from the vocabulary.
+     * Returns all words stored from the vocabulary.
      * 
      * @return array
      */

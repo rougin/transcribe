@@ -9,14 +9,17 @@ use RecursiveIteratorIterator;
 /**
  * Directory Source
  *
- * Retrieves a list of words from a specified folder path
+ * Retrieves a list of words from a specified folder path.
  * 
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class DirectorySource implements SourceInterface
 {
-    protected $path;
+    /**
+     * @var string
+     */
+    protected $path = '';
 
     /**
      * @param string $path

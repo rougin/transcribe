@@ -5,13 +5,16 @@ namespace Rougin\Transcribe\Source;
 /**
  * Multiple Source
  *
- * Retrieves a list of words from multiple sources
+ * Retrieves a list of words from multiple sources.
  * 
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class MultipleSource implements SourceInterface
 {
+    /**
+     * @var array
+     */
     protected $words = [];
 
     /**
