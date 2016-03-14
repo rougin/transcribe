@@ -2,8 +2,8 @@
 
 namespace Rougin\Transcribe;
 
-use Rougin\Transcribe\Source\SourceInterface;
 use Tebru\MultiArray;
+use Rougin\Transcribe\Source\SourceInterface;
 
 /**
  * Transcribe
