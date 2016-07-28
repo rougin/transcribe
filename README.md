@@ -32,8 +32,8 @@ return array(
 ```
 
 ``` php
-use Rougin\Transcribe\Source\DirectorySource;
 use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Source\DirectorySource;
 
 $directory = new DirectorySource(__DIR__ . '/locales');
 $transcribe = new Transcribe($directory);
@@ -49,8 +49,8 @@ The contents of the **word** table
 | fil_PH        | school        | paaralan     |
 
 ``` php
-use Rougin\Transcribe\Source\DatabaseSource;
 use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Source\DatabaseSource;
 
 $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
 
@@ -76,17 +76,17 @@ $transcribe = new Transcribe($database);
 #### Load list of texts from different sources
 
 ``` php
-use Rougin\Transcribe\Source\MultipleSource;
 use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Source\SourceCollection;
 
-$source = new MultipleSource;
+$sources = new SourceCollection;
 
 // Let's use $database and $directory from above as the example
-$source
+$sources
     ->addSource($database)
     ->addSource($directory);
 
-$transcribe = new Transcribe($source);
+$transcribe = new Transcribe($sources);
 ```
 
 #### Getting a text from the *vocabulary*

@@ -2,6 +2,11 @@
 
 All Notable changes to `Transcribe` will be documented in this file
 
+## [0.3.0](https://github.com/rougin/transcribe/compare/v0.2.2...v0.3.0) - 2016-07-29
+
+### Added
+- `SourceCollection`
+
 ## [0.2.2](https://github.com/rougin/transcribe/compare/v0.2.1...v0.2.2) - 2016-03-12
 
 ### Added
