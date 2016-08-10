@@ -3,8 +3,8 @@
 namespace Rougin\Transcribe\Source;
 
 use FilesystemIterator;
-use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 /**
  * Directory Source
@@ -17,16 +17,19 @@ use RecursiveIteratorIterator;
 class DirectorySource implements SourceInterface
 {
     /**
-     * @var string
+     * @var \RecursiveIteratorIterator
      */
-    protected $path = '';
+    protected $iterator;
 
     /**
      * @param string $path
      */
     public function __construct($path)
     {
-        $this->path = $path;
+        $this->iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
     }
 
     /**
@@ -38,17 +41,7 @@ class DirectorySource implements SourceInterface
     {
         $result = [];
 
-        $location = new RecursiveDirectoryIterator(
-            $this->path,
-            FilesystemIterator::SKIP_DOTS
-        );
-
-        $iterator = new RecursiveIteratorIterator(
-            $location,
-            RecursiveIteratorIterator::SELF_FIRST
-        );
-
-        foreach ($iterator as $path) {
+        foreach ($this->iterator as $path) {
             if ($path->isDir()) {
                 continue;
             }

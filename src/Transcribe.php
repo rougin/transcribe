@@ -32,7 +32,7 @@ class Transcribe
      */
     public function __construct(SourceInterface $source)
     {
-        $this->source = $source;
+        $this->source     = $source;
         $this->vocabulary = $source->getWords();
     }
 
@@ -45,7 +45,7 @@ class Transcribe
     public function getText($string = '')
     {
         $multiArray = new MultiArray($this->vocabulary);
-        $result = $multiArray->get($string);
+        $result     = $multiArray->get($string);
 
         return (is_string($result)) ? $result : $string;
     }

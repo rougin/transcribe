@@ -30,7 +30,7 @@ class DatabaseSource implements SourceInterface
      */
     public function __construct(PDO $pdo, array $table)
     {
-        $this->pdo = $pdo;
+        $this->pdo   = $pdo;
         $this->table = $table;
     }
 
@@ -43,12 +43,13 @@ class DatabaseSource implements SourceInterface
     {
         $words = [];
 
-        $language = $this->table['language'];
-        $query = 'SELECT * FROM ' . $this->table['name'];
-        $text = $this->table['text'];
+        $language    = $this->table['language'];
+        $text        = $this->table['text'];
         $translation = $this->table['translation'];
 
+        $query = 'SELECT * FROM ' . $this->table['name'];
         $table = $this->pdo->prepare($query);
+
         $table->execute();
 
         foreach ($table->fetchAll(PDO::FETCH_ASSOC) as $row) {
