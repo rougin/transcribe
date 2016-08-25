@@ -25,18 +25,15 @@ $ composer require rougin/transcribe
 
 ``` php
 return array(
-    'name' => 'pangalan',
+    'name'     => 'pangalan',
     'language' => 'linguahe',
-    'school' => 'paaralan'
+    'school'   => 'paaralan'
 );
 ```
 
 ``` php
-use Rougin\Transcribe\Transcribe;
-use Rougin\Transcribe\Source\DirectorySource;
-
-$directory = new DirectorySource(__DIR__ . '/locales');
-$transcribe = new Transcribe($directory);
+$directory  = new Rougin\Transcribe\Source\DirectorySource(__DIR__ . '/locales');
+$transcribe = new Rougin\Transcribe\Transcribe($directory);
 ```
 
 #### Load a list of texts from a database
@@ -49,12 +46,9 @@ The contents of the **word** table
 | fil_PH        | school        | paaralan     |
 
 ``` php
-use Rougin\Transcribe\Transcribe;
-use Rougin\Transcribe\Source\DatabaseSource;
-
 $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
 
-// Properties of the table you want to access
+// Column names of the table you want to access
 $table = [
     // Name of the table
     'name' => 'word',
@@ -69,24 +63,19 @@ $table = [
     'translation' => 'translation'
 ];
 
-$database = new DatabaseSource($pdo, $table);
-$transcribe = new Transcribe($database);
+$database   = new Rougin\Transcribe\Source\DatabaseSource($pdo, $table);
+$transcribe = new Rougin\Transcribe\Transcribe($database);
 ```
 
 #### Load list of texts from different sources
 
 ``` php
-use Rougin\Transcribe\Transcribe;
-use Rougin\Transcribe\Source\SourceCollection;
-
-$sources = new SourceCollection;
+$sources = new Rougin\Transcribe\Source\SourceCollection;
 
 // Let's use $database and $directory from above as the example
-$sources
-    ->addSource($database)
-    ->addSource($directory);
+$sources->addSource($database)->addSource($directory);
 
-$transcribe = new Transcribe($sources);
+$transcribe = new Rougin\Transcribe\Transcribe($sources);
 ```
 
 #### Getting a text from the *vocabulary*
@@ -95,7 +84,7 @@ $transcribe = new Transcribe($sources);
 // Returns all stored texts
 $transcribe->getVocabulary();
 
-// Returns translation of 'name' in 'fil_PH' group
+// Returns translation of 'name' in 'fil_PH' group (e.g "pangalan")
 $translation->getText('fil_PH.name');
 ```
 
