@@ -14,7 +14,7 @@ interface SourceInterface
 {
     /**
      * Returns a list of words.
-     * 
+     *
      * @return array
      */
     public function getWords();

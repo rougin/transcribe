@@ -8,7 +8,7 @@ use PDO;
  * Database Source
  *
  * Retrieves a list of words via PHP Database Object.
- * 
+ *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
@@ -36,7 +36,7 @@ class DatabaseSource implements SourceInterface
 
     /**
      * Returns a list of words.
-     * 
+     *
      * @return array
      */
     public function getWords()

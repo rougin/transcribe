@@ -29,7 +29,7 @@ class DirectorySourceTest extends PHPUnit_Framework_TestCase
 
     /**
      * Checks if the specified text is retrieved properly.
-     * 
+     *
      * @return void
      */
     public function testGetText()
@@ -41,7 +41,7 @@ class DirectorySourceTest extends PHPUnit_Framework_TestCase
 
     /**
      * Checks if the specified texts is equal to getVocabulary().
-     * 
+     *
      * @return void
      */
     public function testGetVocabulary()

@@ -22,7 +22,7 @@ class Transcribe
 
     /**
      * List of words.
-     * 
+     *
      * @var array
      */
     protected $vocabulary = [];
@@ -38,7 +38,7 @@ class Transcribe
 
     /**
      * Gets the specified text from the list of defined words in the file.
-     * 
+     *
      * @param  string $string
      * @return string
      */
@@ -52,7 +52,7 @@ class Transcribe
 
     /**
      * Returns all words stored from the vocabulary.
-     * 
+     *
      * @return array
      */
     public function getVocabulary()

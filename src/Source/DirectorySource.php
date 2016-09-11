@@ -10,7 +10,7 @@ use RecursiveDirectoryIterator;
  * Directory Source
  *
  * Retrieves a list of words from a specified folder path.
- * 
+ *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
@@ -34,7 +34,7 @@ class DirectorySource implements SourceInterface
 
     /**
      * Returns a list of words.
-     * 
+     *
      * @return array
      */
     public function getWords()
