@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Yet another language library for PHP
+Yet another language library for PHP.
 
 ## Install
 
