@@ -24,16 +24,19 @@ $ composer require rougin/transcribe
 **locales/fil_PH.php**
 
 ``` php
-return array(
-    'name'     => 'pangalan',
-    'language' => 'linguahe',
-    'school'   => 'paaralan'
-);
+$texts = array();
+
+array_push('name', 'pangalan');
+array_push('language', 'linguahe');
+array_push('school', 'paaralan');
+
+return $texts;
 ```
 
 ``` php
-$directory  = new Rougin\Transcribe\Source\DirectorySource(__DIR__ . '/locales');
-$transcribe = new Rougin\Transcribe\Transcribe($directory);
+$directory = new \Rougin\Transcribe\Source\DirectorySource(__DIR__ . '/locales');
+
+$transcribe = new \Rougin\Transcribe\Transcribe($directory);
 ```
 
 #### Load a list of texts from a database
