@@ -52,7 +52,7 @@ The contents of the **word** table
 $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
 
 // Column names of the table you want to access
-$table = [
+$table = array(
     // Name of the table
     'name' => 'word',
 
@@ -64,9 +64,10 @@ $table = [
 
     // The translation from the based language
     'translation' => 'translation'
-];
+);
 
-$database   = new Rougin\Transcribe\Source\DatabaseSource($pdo, $table);
+$database = new Rougin\Transcribe\Source\DatabaseSource($pdo, $table);
+
 $transcribe = new Rougin\Transcribe\Transcribe($database);
 ```
 
