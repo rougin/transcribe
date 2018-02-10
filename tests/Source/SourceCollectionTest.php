@@ -3,16 +3,23 @@
 namespace Rougin\Transcribe\Source;
 
 use Rougin\Transcribe\Source\DatabaseSource;
+use Rougin\Transcribe\Source\DirectorySource;
+use Rougin\Transcribe\Source\MultipleSource;
 use Rougin\Transcribe\Transcribe;
 
 /**
- * Database Source Test
+ * Source Collection Test
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class DatabaseSourceTest extends AbstractTestCase
+class SourceCollectionTest extends AbstractTestCase
 {
+    /**
+     * @var \Rougin\Transcribe\Transcribe
+     */
+    protected $transcribe;
+
     /**
      * Sets up the library.
      *
@@ -32,7 +39,11 @@ class DatabaseSourceTest extends AbstractTestCase
 
         $table['translation'] = 'translation';
 
-        $source = new DatabaseSource($pdo, $table);
+        $source = new SourceCollection;
+
+        $source->addSource(new DatabaseSource($pdo, $table));
+
+        $source->addSource(new DirectorySource($path . '/Locales'));
 
         $this->transcribe = new Transcribe($source);
     }

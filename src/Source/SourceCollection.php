@@ -5,7 +5,7 @@ namespace Rougin\Transcribe\Source;
 /**
  * Source Collection
  *
- * Retrieves a list of words from multiple sources.
+ * Returns an array of words from multiple sources.
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -13,30 +13,72 @@ namespace Rougin\Transcribe\Source;
 class SourceCollection implements SourceInterface
 {
     /**
-     * @var array
+     * @var \Rougin\Transcribe\Source\SourceInterface[]
      */
-    protected $words = [];
+    protected $sources = array();
 
     /**
-     * Adds another source to the list of words.
+     * Initializes the source instance.
      *
-     * @param  SourceInterface $source
+     * @param \Rougin\Transcribe\Source\SourceInterface[] $sources
+     */
+    public function __construct(array $sources = array())
+    {
+        $this->sources = $sources;
+    }
+
+    /**
+     * Add a SourceInterface instance to the collection.
+     *
+     * @param  \Rougin\Transcribe\Source\SourceInterface $source
      * @return self
      */
-    public function addSource(SourceInterface $source)
+    public function add(SourceInterface $source)
     {
-        $this->words = array_merge($this->words, $source->getWords());
+        $this->sources[] = $source;
 
         return $this;
     }
 
     /**
-     * Returns a list of words.
+     * Add a SourceInterface instance to the collection.
+     * NOTE: To be removed in v1.0.0. Use "add" instead.
+     *
+     * @param  \Rougin\Transcribe\Source\SourceInterface $source
+     * @return self
+     */
+    public function addSource(SourceInterface $source)
+    {
+        return $this->add($source);
+    }
+
+    /**
+     * Returns an array of words.
+     * NOTE: To be removed in v1.0.0. Use "words" instead.
      *
      * @return array
      */
     public function getWords()
     {
-        return $this->words;
+        return $this->words();
+    }
+
+    /**
+     * Returns an array of words.
+     *
+     * @return array
+     */
+    public function words()
+    {
+        $words = array();
+
+        foreach ((array) $this->sources as $source) {
+            // Note: Use $source->words() in v1.0.0.
+            $addition = (array) $source->getWords();
+
+            $words = array_merge($words, $addition);
+        }
+
+        return $words;
     }
 }

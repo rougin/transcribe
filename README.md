@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Yet another language library for PHP.
+An easy-to-use localization library for PHP.
 
 ## Install
 
@@ -19,29 +19,32 @@ $ composer require rougin/transcribe
 
 ## Usage
 
-#### Load a list of texts from a directory
+### Load a list of texts from a directory
 
 **locales/fil_PH.php**
 
 ``` php
 $texts = array();
 
-array_push('name', 'pangalan');
-array_push('language', 'linguahe');
-array_push('school', 'paaralan');
+$texts['language'] = 'linguahe';
+$texts['name'] = 'pangalan';
+$texts['school'] = 'paaralan';
 
 return $texts;
 ```
 
 ``` php
-$directory = new \Rougin\Transcribe\Source\DirectorySource(__DIR__ . '/locales');
+use Rougin\Transcribe\Source\DirectorySource;
+use Rougin\Transcribe\Transcribe;
 
-$transcribe = new \Rougin\Transcribe\Transcribe($directory);
+$source = new DirectorySource(__DIR__ . '/locales');
+
+$transcribe = new Transcribe($source);
 ```
 
-#### Load a list of texts from a database
+### Load a list of texts from a database
 
-The contents of the **word** table
+The contents of the **words** table
 
 | language      | text          | translation  |
 | ------------- | ------------- | ------------ |
@@ -49,52 +52,73 @@ The contents of the **word** table
 | fil_PH        | school        | paaralan     |
 
 ``` php
+use Rougin\Transcribe\Source\DirectorySource;
+use Rougin\Transcribe\Transcribe;
+
 $pdo = new PDO('mysql:host=localhost;dbname=demo', 'root', '');
 
-// Column names of the table you want to access
-$table = array(
-    // Name of the table
-    'name' => 'word',
+$table = array('name' => 'words');
 
-    // Language name based from a locale (e.g en_GB) or just group of words
-    'language' => 'language',
+$table['language'] = 'language';
+$table['text'] = 'text';
+$table['translation'] = 'translation';
 
-    // A keyword or a text to be translated
-    'text' => 'text',
+$source = new DatabaseSource($pdo, $table);
 
-    // The translation from the based language
-    'translation' => 'translation'
-);
-
-$database = new Rougin\Transcribe\Source\DatabaseSource($pdo, $table);
-
-$transcribe = new Rougin\Transcribe\Transcribe($database);
+$transcribe = new Transcribe($source);
 ```
 
-#### Load list of texts from different sources
+#### Must-have properties of `$table`
+
+* `name` - name of the database table
+* `language` - language name based from a locale (e.g en_GB)
+* `text` - a keyword or a text to be translated
+* `translation` - translation from the based language
+
+### Load list of texts from different sources
 
 ``` php
-$sources = new Rougin\Transcribe\Source\SourceCollection;
+use Rougin\Transcribe\Source\DatabaseSource;
+use Rougin\Transcribe\Source\DirectorySource;
+use Rougin\Transcribe\Source\SourceCollection;
+use Rougin\Transcribe\Transcribe;
 
-// Let's use $database and $directory from above as the example
-$sources->addSource($database)->addSource($directory);
+$collection = new SourceCollection;
 
-$transcribe = new Rougin\Transcribe\Transcribe($sources);
+// "$database" is a DatabaseSource instance
+// while "$directory" is a DirectorySource.
+$collection->add($database)->add($directory);
+
+$transcribe = new Transcribe($collection);
 ```
 
-#### Getting a text from the *vocabulary*
+### Getting a text from the *vocabulary*
 
 ``` php
 // Returns all stored texts
-$transcribe->getVocabulary();
+$texts = $transcribe->all();
 
 // Returns translation of 'name' in 'fil_PH' group (e.g "pangalan")
-$translation->getText('fil_PH.name');
+$text = $transcribe->get('fil_PH.name');
 ```
 
-#### Adding new source
+### Adding new source
 
-You can always add a new source if you want. Just implement the source of your choice in a [SourceInterface](https://github.com/rougin/transcribe/blob/master/src/Source/SourceInterface.php).
+Just implement it to a [SourceInterface](https://github.com/rougin/transcribe/blob/master/src/Source/SourceInterface.php).
+
+``` php
+namespace Rougin\Transcribe\Source;
+
+interface SourceInterface
+{
+    /**
+     * Returns an array of words.
+     *
+     * @return array
+     */
+    public function words();
+}
+```
 
 ## Change log
 
@@ -105,10 +129,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ``` bash
 $ composer test
 ```
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 

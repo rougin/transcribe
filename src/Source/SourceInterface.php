@@ -5,7 +5,7 @@ namespace Rougin\Transcribe\Source;
 /**
  * Source Interface
  *
- * An interface that gets a list of words from various sources.
+ * An interface that returns an array of words from various sources.
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -13,9 +13,17 @@ namespace Rougin\Transcribe\Source;
 interface SourceInterface
 {
     /**
-     * Returns a list of words.
+     * Returns an array of words.
+     * NOTE: To be removed in v1.0.0. Use "words" instead.
      *
      * @return array
      */
     public function getWords();
+
+    /**
+     * Returns an array of words.
+     *
+     * @return array
+     */
+    public function words();
 }

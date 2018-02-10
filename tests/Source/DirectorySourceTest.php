@@ -1,13 +1,17 @@
 <?php
 
-namespace Rougin\Transcribe\Test\Source;
+namespace Rougin\Transcribe\Source;
 
-use Rougin\Transcribe\Transcribe;
 use Rougin\Transcribe\Source\DirectorySource;
+use Rougin\Transcribe\Transcribe;
 
-use PHPUnit_Framework_TestCase;
-
-class DirectorySourceTest extends PHPUnit_Framework_TestCase
+/**
+ * Directory Source Test
+ *
+ * @package Transcribe
+ * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ */
+class DirectorySourceTest extends AbstractTestCase
 {
     /**
      * @var \Rougin\Transcribe\Transcribe
@@ -21,39 +25,10 @@ class DirectorySourceTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $fixturePath = str_replace('Source', 'Fixture', __DIR__);
+        $path = str_replace('Source', 'Fixture', __DIR__);
 
-        $source = new DirectorySource($fixturePath . '/Languages');
+        $source = new DirectorySource($path . '/Locales');
+
         $this->transcribe = new Transcribe($source);
-    }
-
-    /**
-     * Checks if the specified text is retrieved properly.
-     *
-     * @return void
-     */
-    public function testGetText()
-    {
-        $text = 'pangalan';
-
-        $this->assertEquals($text, $this->transcribe->getText('fil_PH.name'));
-    }
-
-    /**
-     * Checks if the specified texts is equal to getVocabulary().
-     *
-     * @return void
-     */
-    public function testGetVocabulary()
-    {
-        $vocabulary = [
-            'fil_PH' => [
-                'name'     => 'pangalan',
-                'language' => 'linguahe',
-                'school'   => 'paaralan',
-            ]
-        ];
-
-        $this->assertEquals($vocabulary, $this->transcribe->getVocabulary());
     }
 }

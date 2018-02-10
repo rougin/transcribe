@@ -3,13 +3,13 @@
 namespace Rougin\Transcribe\Source;
 
 use FilesystemIterator;
-use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * Directory Source
  *
- * Retrieves a list of words from a specified folder path.
+ * Returns an array of words from a specified directory path.
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -22,35 +22,50 @@ class DirectorySource implements SourceInterface
     protected $iterator;
 
     /**
+     * Intializes the source instance.
+     *
      * @param string $path
      */
     public function __construct($path)
     {
-        $this->iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::SELF_FIRST
-        );
+        $directory = new \RecursiveDirectoryIterator($path, 4096);
+
+        $iterator = new \RecursiveIteratorIterator($directory, 1);
+
+        $this->iterator = $iterator;
     }
 
     /**
-     * Returns a list of words.
+     * Returns an array of words.
+     * NOTE: To be removed in v1.0.0. Use "words" instead.
      *
      * @return array
      */
     public function getWords()
     {
-        $result = [];
+        return $this->words();
+    }
 
-        foreach ($this->iterator as $path) {
-            if ($path->isDir()) {
-                continue;
-            }
+    /**
+     * Returns an array of words.
+     *
+     * @return array
+     */
+    public function words()
+    {
+        $result = array();
 
-            $data = include realpath($path->__toString());
-            $group = str_replace('.php', '', $path->getFilename());
+        foreach ($this->iterator as $file) {
+            $filename = (string) $file->getFilename();
 
-            if (is_array($data)) {
-                $result[$group] = $data;
+            $realpath = (string) $file->getRealPath();
+
+            $group = str_replace('.php', '', $filename);
+
+            if ($file->isDir() === false) {
+                $data = require (string) $realpath;
+
+                $result[$group] = (array) $data;
             }
         }
 

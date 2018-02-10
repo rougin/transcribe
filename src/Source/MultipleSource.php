@@ -5,7 +5,8 @@ namespace Rougin\Transcribe\Source;
 /**
  * Multiple Source
  *
- * Retrieves a list of words from multiple sources.
+ * Returns an array of words from multiple sources.
+ * NOTE: To be removed in v1.0.0. Use "SourceCollection" instead.
  *
  * @package Transcribe
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
