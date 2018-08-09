@@ -27,12 +27,12 @@ class Transcribe
 
     /**
      * Initializes the Transcribe instance.
+     * NOTE: Use $source->words() in v1.0.0.
      *
      * @param \Rougin\Transcribe\Source\SourceInterface $source
      */
     public function __construct(SourceInterface $source)
     {
-        // Note: Use $source->words() in v1.0.0.
         $this->words = $source->getWords();
 
         $this->dotified = $this->dotify($this->words);
