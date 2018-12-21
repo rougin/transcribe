@@ -1,7 +1,7 @@
 # Transcribe
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
+[![Software License][ico-license]][link-license]
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
@@ -9,15 +9,15 @@
 
 An easy-to-use localization library for PHP.
 
-## Install
+## Installation
 
-Via Composer
+Install `Transcribe` via [Composer](https://getcomposer.org/):
 
 ``` bash
 $ composer require rougin/transcribe
 ```
 
-## Usage
+## Basic Usage
 
 ### Load a list of texts from a directory
 
@@ -120,9 +120,9 @@ interface SourceInterface
 }
 ```
 
-## Change log
+## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG][link-changelog] for more information what has changed recently.
 
 ## Testing
 
@@ -130,30 +130,26 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 $ composer test
 ```
 
-## Security
-
-If you discover any security related issues, please email rougingutib@gmail.com instead of using the issue tracker.
-
 ## Credits
 
-- [Rougin Royce Gutib][link-author]
-- [All Contributors][link-contributors]
+- [All contributors][link-contributors]
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [LICENSE][link-license] for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/rougin/transcribe.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/rougin/transcribe/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/rougin/transcribe.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/rougin/transcribe.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/rougin/transcribe.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/rougin/transcribe.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/rougin/transcribe/master.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/rougin/transcribe.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/rougin/transcribe
-[link-travis]: https://travis-ci.org/rougin/transcribe
-[link-scrutinizer]: https://scrutinizer-ci.com/g/rougin/transcribe/code-structure
+[link-changelog]: https://github.com/rougin/transcribe/blob/master/CHANGELOG.md
 [link-code-quality]: https://scrutinizer-ci.com/g/rougin/transcribe
+[link-contributors]: https://github.com/rougin/transcribe/contributors
 [link-downloads]: https://packagist.org/packages/rougin/transcribe
-[link-author]: https://github.com/rougin
-[link-contributors]: ../../contributors
+[link-license]: https://github.com/rougin/transcribe/blob/master/LICENSE.md
+[link-packagist]: https://packagist.org/packages/rougin/transcribe
+[link-scrutinizer]: https://scrutinizer-ci.com/g/rougin/transcribe/code-structure
+[link-travis]: https://travis-ci.org/rougin/transcribe
