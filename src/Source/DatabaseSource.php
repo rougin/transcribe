@@ -8,7 +8,7 @@ namespace Rougin\Transcribe\Source;
  * Returns an array of words using the PHP Database Object (PDO).
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseSource implements SourceInterface
 {
