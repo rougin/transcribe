@@ -12,7 +12,7 @@ use RecursiveIteratorIterator;
  * Returns an array of words from a specified directory path.
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class DirectorySource implements SourceInterface
 {
