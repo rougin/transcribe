@@ -9,7 +9,7 @@ namespace Rougin\Transcribe\Source;
  * NOTE: To be removed in v1.0.0. Use "SourceCollection" instead.
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class MultipleSource extends SourceCollection
 {
