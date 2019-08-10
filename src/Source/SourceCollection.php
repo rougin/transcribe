@@ -8,7 +8,7 @@ namespace Rougin\Transcribe\Source;
  * Returns an array of words from multiple sources.
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class SourceCollection implements SourceInterface
 {
