@@ -2,7 +2,6 @@
 
 namespace Rougin\Transcribe;
 
-use Tebru\MultiArray;
 use Rougin\Transcribe\Source\SourceInterface;
 
 /**
@@ -11,7 +10,7 @@ use Rougin\Transcribe\Source\SourceInterface;
  * An easy-to-use localization library for PHP.
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Transcribe
 {
