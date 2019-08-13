@@ -6,7 +6,7 @@ namespace Rougin\Transcribe\Source;
  * Abstract Test Case
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
