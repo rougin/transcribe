@@ -9,7 +9,7 @@ use Rougin\Transcribe\Transcribe;
  * Database Source Test
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseSourceTest extends AbstractTestCase
 {
