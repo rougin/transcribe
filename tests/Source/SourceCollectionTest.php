@@ -11,7 +11,7 @@ use Rougin\Transcribe\Transcribe;
  * Source Collection Test
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class SourceCollectionTest extends AbstractTestCase
 {
