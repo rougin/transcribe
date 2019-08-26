@@ -9,7 +9,7 @@ use Rougin\Transcribe\Transcribe;
  * Directory Source Test
  *
  * @package Transcribe
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class DirectorySourceTest extends AbstractTestCase
 {
