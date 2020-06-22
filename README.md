@@ -7,11 +7,11 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An easy-to-use localization library for PHP.
+Transcribe is an easy-to-use localization library for PHP. The localization source can be file-based (similar to [Laravel's Localization](https://laravel.com/docs/5.7/localization)) or from a database connection.
 
 ## Installation
 
-Install `Transcribe` via [Composer](https://getcomposer.org/):
+Install `Transcribe` through [Composer](https://getcomposer.org/):
 
 ``` bash
 $ composer require rougin/transcribe
@@ -44,7 +44,7 @@ $transcribe = new Transcribe($source);
 
 ### Load a list of texts from a database
 
-The contents of the **words** table
+The contents of the **words** table:
 
 | language      | text          | translation  |
 | ------------- | ------------- | ------------ |
@@ -71,7 +71,7 @@ $transcribe = new Transcribe($source);
 #### Must-have properties of `$table`
 
 * `name` - name of the database table
-* `language` - language name based from a locale (e.g en_GB)
+* `language` - language name based from a locale (e.g `en_GB`)
 * `text` - a keyword or a text to be translated
 * `translation` - translation from the based language
 
