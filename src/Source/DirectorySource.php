@@ -2,44 +2,37 @@
 
 namespace Rougin\Transcribe\Source;
 
-use FilesystemIterator;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-
 /**
- * Directory Source
- *
- * Returns an array of words from a specified directory path.
- *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class DirectorySource implements SourceInterface
 {
     /**
-     * @var \RecursiveIteratorIterator
+     * @var \SplFileInfo[]
      */
     protected $iterator;
 
     /**
-     * Intializes the source instance.
-     *
      * @param string $path
      */
     public function __construct($path)
     {
         $directory = new \RecursiveDirectoryIterator($path, 4096);
 
+        /** @var \SplFileInfo[] */
         $iterator = new \RecursiveIteratorIterator($directory, 1);
 
         $this->iterator = $iterator;
     }
 
     /**
-     * Returns an array of words.
-     * NOTE: To be removed in v1.0.0. Use "words" instead.
+     * @deprecated since ~0.4, use "words" instead.
      *
-     * @return array
+     * Returns an array of words.
+     *
+     * @return array<string, array<string, string>>
      */
     public function getWords()
     {
@@ -49,26 +42,27 @@ class DirectorySource implements SourceInterface
     /**
      * Returns an array of words.
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function words()
     {
-        $result = array();
+        $items = array();
 
-        foreach ($this->iterator as $file) {
-            $filename = (string) $file->getFilename();
+        foreach ($this->iterator as $file)
+        {
+            $filename = $file->getFilename();
 
-            $realpath = (string) $file->getRealPath();
+            /** @var string */
+            $realpath = $file->getRealPath();
 
             $group = str_replace('.php', '', $filename);
 
-            if ($file->isDir() === false) {
-                $data = require (string) $realpath;
-
-                $result[$group] = (array) $data;
+            if (! $file->isDir())
+            {
+                $items[$group] = require $realpath;
             }
         }
 
-        return $result;
+        return $items;
     }
 }

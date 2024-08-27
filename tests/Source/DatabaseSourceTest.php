@@ -2,23 +2,21 @@
 
 namespace Rougin\Transcribe\Source;
 
-use Rougin\Transcribe\Source\DatabaseSource;
 use Rougin\Transcribe\Transcribe;
 
 /**
  * Database Source Test
  *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseSourceTest extends AbstractTestCase
 {
     /**
-     * Sets up the library.
-     *
      * @return void
      */
-    public function setUp()
+    public function doSetUp()
     {
         $path = str_replace('Source', 'Fixture', __DIR__);
 

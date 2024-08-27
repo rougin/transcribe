@@ -2,13 +2,14 @@
 
 namespace Rougin\Transcribe\Source;
 
+use Rougin\Transcribe\Testcase;
+
 /**
- * Abstract Test Case
- *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class AbstractTestCase extends \PHPUnit_Framework_TestCase
+class AbstractTestCase extends Testcase
 {
     /**
      * @var \Rougin\Transcribe\Transcribe
@@ -20,17 +21,15 @@ class AbstractTestCase extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function doSetUp()
     {
         $this->markTestSkipped('No defined SourceInterface');
     }
 
     /**
-     * Tests Transcribe::getText.
-     *
      * @return void
      */
-    public function testGetTextMethod()
+    public function test_get_text_from_file()
     {
         $expected = (string) 'pangalan';
 
@@ -40,11 +39,9 @@ class AbstractTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Transcribe::getText with nonexistent text.
-     *
      * @return void
      */
-    public function testGetTextMethodWithNonexistentText()
+    public function test_nonexistant_text()
     {
         $expected = (string) 'test';
 
@@ -58,7 +55,7 @@ class AbstractTestCase extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testGetVocabularyMethod()
+    public function test_get_all_defined_words()
     {
         $expected = array('fil_PH' => array());
 

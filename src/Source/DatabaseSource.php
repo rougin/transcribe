@@ -3,12 +3,9 @@
 namespace Rougin\Transcribe\Source;
 
 /**
- * Database Source
- *
- * Returns an array of words using the PHP Database Object (PDO).
- *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseSource implements SourceInterface
 {
@@ -18,20 +15,18 @@ class DatabaseSource implements SourceInterface
     protected $pdo;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected $table;
 
     /**
-     * @var array
+     * @var array<string, array<string, string>>
      */
     protected $words = array();
 
     /**
-     * Initializes the source instance.
-     *
-     * @param \PDO  $pdo
-     * @param array $table
+     * @param \PDO                  $pdo
+     * @param array<string, string> $table
      */
     public function __construct(\PDO $pdo, array $table)
     {
@@ -41,10 +36,11 @@ class DatabaseSource implements SourceInterface
     }
 
     /**
-     * Returns an array of words.
-     * NOTE: To be removed in v1.0.0. Use "words" instead.
+     * @deprecated since ~0.4, use "words" instead.
      *
-     * @return array
+     * Returns an array of words.
+     *
+     * @return array<string, array<string, string>>
      */
     public function getWords()
     {
@@ -54,7 +50,7 @@ class DatabaseSource implements SourceInterface
     /**
      * Returns an array of words.
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function words()
     {
@@ -64,14 +60,23 @@ class DatabaseSource implements SourceInterface
 
         $table->execute();
 
-        foreach ($table->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-            $group = $row[$this->table['language']];
+        $fields = $this->table;
 
-            isset($this->words[$group]) || $this->words[$group] = array();
+        /** @var array<string, string>[] */
+        $items = $table->fetchAll(\PDO::FETCH_ASSOC);
 
-            $text = (string) $row[$this->table['text']];
+        foreach ($items as $row)
+        {
+            $group = $row[$fields['language']];
 
-            $translation = $row[$this->table['translation']];
+            if (! isset($this->words[$group]))
+            {
+                $this->words[$group] = array();
+            }
+
+            $translation = $row[$fields['translation']];
+
+            $text = (string) $row[$fields['text']];
 
             $this->words[$group][$text] = $translation;
         }

@@ -3,12 +3,9 @@
 namespace Rougin\Transcribe\Source;
 
 /**
- * Source Collection
- *
- * Returns an array of words from multiple sources.
- *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class SourceCollection implements SourceInterface
 {
@@ -18,8 +15,6 @@ class SourceCollection implements SourceInterface
     protected $sources = array();
 
     /**
-     * Initializes the source instance.
-     *
      * @param \Rougin\Transcribe\Source\SourceInterface[] $sources
      */
     public function __construct(array $sources = array())
@@ -28,9 +23,10 @@ class SourceCollection implements SourceInterface
     }
 
     /**
-     * Add a SourceInterface instance to the collection.
+     * Adds a SourceInterface to the collection.
      *
-     * @param  \Rougin\Transcribe\Source\SourceInterface $source
+     * @param \Rougin\Transcribe\Source\SourceInterface $source
+     *
      * @return self
      */
     public function add(SourceInterface $source)
@@ -41,10 +37,12 @@ class SourceCollection implements SourceInterface
     }
 
     /**
-     * Add a SourceInterface instance to the collection.
-     * NOTE: To be removed in v1.0.0. Use "add" instead.
+     * @deprecated since ~0.4, use "add" instead.
      *
-     * @param  \Rougin\Transcribe\Source\SourceInterface $source
+     * Adds a SourceInterface to the collection.
+     *
+     * @param \Rougin\Transcribe\Source\SourceInterface $source
+     *
      * @return self
      */
     public function addSource(SourceInterface $source)
@@ -53,10 +51,11 @@ class SourceCollection implements SourceInterface
     }
 
     /**
-     * Returns an array of words.
-     * NOTE: To be removed in v1.0.0. Use "words" instead.
+     * @deprecated since ~0.4, use "words" instead.
      *
-     * @return array
+     * Returns an array of words.
+     *
+     * @return array<string, array<string, string>>
      */
     public function getWords()
     {
@@ -66,14 +65,15 @@ class SourceCollection implements SourceInterface
     /**
      * Returns an array of words.
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function words()
     {
         $words = array();
 
-        foreach ((array) $this->sources as $source) {
-            // Note: Use $source->words() in v1.0.0.
+        foreach ($this->sources as $source)
+        {
+            /** @deprecated since ~0.4, use "words" instead. */
             $addition = (array) $source->getWords();
 
             $words = array_merge($words, $addition);

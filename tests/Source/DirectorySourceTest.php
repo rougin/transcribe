@@ -2,14 +2,14 @@
 
 namespace Rougin\Transcribe\Source;
 
-use Rougin\Transcribe\Source\DirectorySource;
 use Rougin\Transcribe\Transcribe;
 
 /**
  * Directory Source Test
  *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class DirectorySourceTest extends AbstractTestCase
 {
@@ -19,11 +19,9 @@ class DirectorySourceTest extends AbstractTestCase
     protected $transcribe;
 
     /**
-     * Sets up the library.
-     *
      * @return void
      */
-    public function setUp()
+    public function doSetUp()
     {
         $path = str_replace('Source', 'Fixture', __DIR__);
 

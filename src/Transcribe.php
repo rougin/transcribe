@@ -5,42 +5,39 @@ namespace Rougin\Transcribe;
 use Rougin\Transcribe\Source\SourceInterface;
 
 /**
- * Transcribe
- *
- * An easy-to-use localization library for PHP.
- *
  * @package Transcribe
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Transcribe
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $dotified = array();
 
     /**
-     * @var array
+     * @var array<string, array<string, string>>
      */
     protected $words = array();
 
     /**
-     * Initializes the Transcribe instance.
-     * NOTE: Use $source->words() in v1.0.0.
-     *
      * @param \Rougin\Transcribe\Source\SourceInterface $source
      */
     public function __construct(SourceInterface $source)
     {
+        /** @deprecated since ~0.4, use "words" instead. */
         $this->words = $source->getWords();
 
-        $this->dotified = $this->dotify($this->words);
+        $data = $this->dotify($this->words);
+
+        $this->dotified = (array) $data;
     }
 
     /**
      * Returns all words stored from the source.
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function all()
     {
@@ -49,25 +46,29 @@ class Transcribe
 
     /**
      * Returns the specified text from an array of words.
-     * NOTE: To be removed in v1.0.0. Use "get" instead.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return string
      */
     public function get($text)
     {
-        if (! isset($this->dotified[$text])) {
+        if (! isset($this->dotified[$text]))
+        {
             $this->dotified[$text] = $text;
         }
 
+        /** @var string */
         return $this->dotified[$text];
     }
 
     /**
-     * Returns the specified text from an array of words.
-     * NOTE: To be removed in v1.0.0. Use "get" instead.
+     * @deprecated since ~0.4, use "get" instead.
      *
-     * @param  string $text
+     * Returns the specified text from an array of words.
+     *
+     * @param string $text
+     *
      * @return string
      */
     public function getText($text)
@@ -76,10 +77,11 @@ class Transcribe
     }
 
     /**
-     * Returns all words stored from the source.
-     * NOTE: To be removed in v1.0.0. Use "all" instead.
+     * @deprecated since ~0.4, use "all" instead.
      *
-     * @return array
+     * Returns all words stored from the source.
+     *
+     * @return array<string, array<string, string>>
      */
     public function getVocabulary()
     {
@@ -89,23 +91,28 @@ class Transcribe
     /**
      * Converts the data into dot notation values.
      *
-     * @param  array  $data
-     * @param  array  $result
-     * @param  string $key
-     * @return array
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $result
+     * @param string               $key
+     *
+     * @return array<string, mixed>
      */
     protected function dotify(array $data, $result = array(), $key = '')
     {
-        foreach ((array) $data as $name => $value) {
-            if (is_array($value) === true) {
-                $new = (string) $key . $name . '.';
+        foreach ($data as $name => $value)
+        {
+            $field = (string) $key . $name;
 
-                $array = $this->dotify($value, $result, $new);
+            if (! is_array($value))
+            {
+                $result[$field] = $value;
 
-                $result = array_merge($result, $array);
+                continue;
             }
 
-            is_array($value) || $result[$key . $name] = $value;
+            $output = $this->dotify($value, $result, $field . '.');
+
+            $result = array_merge($result, $output);
         }
 
         return $result;

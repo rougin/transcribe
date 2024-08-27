@@ -12,6 +12,9 @@ All notable changes to `Transcribe` will be documented in this file.
 
 ### Changed
 - Minimum version of PHP to `v5.3.0`
+- Code documentation by `php-cs-fixer`, code quality by `phpstan`
+- Workflow from `Travis CI` to `Github Actions`
+- Code coverage from `Scrutinizer CI` to `Codecov`
 
 ### Deprecated
 - `SourceCollection::addSource`
