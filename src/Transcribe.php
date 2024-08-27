@@ -14,7 +14,7 @@ class Transcribe
     /**
      * @var array<string, mixed>
      */
-    protected $dotified = array();
+    protected $parsed = array();
 
     /**
      * @var array<string, array<string, string>>
@@ -29,9 +29,7 @@ class Transcribe
         /** @deprecated since ~0.4, use "words" instead. */
         $this->words = $source->getWords();
 
-        $data = $this->dotify($this->words);
-
-        $this->dotified = (array) $data;
+        $this->parsed = $this->parse($this->words);
     }
 
     /**
@@ -53,13 +51,13 @@ class Transcribe
      */
     public function get($text)
     {
-        if (! isset($this->dotified[$text]))
+        if (! isset($this->parsed[$text]))
         {
-            $this->dotified[$text] = $text;
+            $this->parsed[$text] = $text;
         }
 
         /** @var string */
-        return $this->dotified[$text];
+        return $this->parsed[$text];
     }
 
     /**
@@ -97,7 +95,7 @@ class Transcribe
      *
      * @return array<string, mixed>
      */
-    protected function dotify(array $data, $result = array(), $key = '')
+    protected function parse(array $data, $result = array(), $key = '')
     {
         foreach ($data as $name => $value)
         {
@@ -110,7 +108,7 @@ class Transcribe
                 continue;
             }
 
-            $output = $this->dotify($value, $result, $field . '.');
+            $output = $this->parse($value, $result, $field . '.');
 
             $result = array_merge($result, $output);
         }

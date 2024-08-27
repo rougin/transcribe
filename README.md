@@ -61,10 +61,10 @@ Alternatively, the localization source can be from a database. It should have th
 * `translation` - translation from the based language
 
 ```
-| language  | text    | translation  |
-| --------- | ------- | ------------ |
-| fil_PH    | name    | pangalan     |
-| fil_PH    | school  | paaralan     |
+| language | text   | translation |
+| -------- | ------ | ----------- |
+| fil_PH   | name   | pangalan    |
+| fil_PH   | school | paaralan    |
 ```
 
 ``` php
