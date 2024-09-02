@@ -161,17 +161,17 @@ $ composer test
 
 The MIT License (MIT). Please see [LICENSE][link-license] for more information.
 
-[ico-build]: https://img.shields.io/github/actions/workflow/status/rougin/wildfire/build.yml?style=flat-square
-[ico-coverage]: https://img.shields.io/codecov/c/github/rougin/wildfire?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/rougin/wildfire.svg?style=flat-square
+[ico-build]: https://img.shields.io/github/actions/workflow/status/rougin/transcribe/build.yml?style=flat-square
+[ico-coverage]: https://img.shields.io/codecov/c/github/rougin/transcribe?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/rougin/transcribe.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-version]: https://img.shields.io/packagist/v/rougin/wildfire.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/rougin/transcribe.svg?style=flat-square
 
-[link-build]: https://github.com/rougin/wildfire/actions
-[link-changelog]: https://github.com/rougin/wildfire/blob/master/CHANGELOG.md
-[link-contributors]: https://github.com/rougin/wildfire/contributors
-[link-coverage]: https://app.codecov.io/gh/rougin/wildfire
-[link-downloads]: https://packagist.org/packages/rougin/wildfire
-[link-license]: https://github.com/rougin/wildfire/blob/master/LICENSE.md
-[link-packagist]: https://packagist.org/packages/rougin/wildfire
-[link-upgrading]: https://github.com/rougin/wildfire/blob/master/UPGRADING.md
+[link-build]: https://github.com/rougin/transcribe/actions
+[link-changelog]: https://github.com/rougin/transcribe/blob/master/CHANGELOG.md
+[link-contributors]: https://github.com/rougin/transcribe/contributors
+[link-coverage]: https://app.codecov.io/gh/rougin/transcribe
+[link-downloads]: https://packagist.org/packages/rougin/transcribe
+[link-license]: https://github.com/rougin/transcribe/blob/master/LICENSE.md
+[link-packagist]: https://packagist.org/packages/rougin/transcribe
+[link-upgrading]: https://github.com/rougin/transcribe/blob/master/UPGRADING.md
