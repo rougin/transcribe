@@ -137,7 +137,7 @@ interface SourceInterface
     /**
      * Returns an array of words.
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function words();
 }
