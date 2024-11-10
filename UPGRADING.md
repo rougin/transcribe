@@ -92,7 +92,9 @@ use Rougin\Transcribe\Source\FileSource;
 
 $source = new SourceCollection;
 
-$source->addSource(new FileSource);
+// ...
+
+$source->addSource(new FileSource($path));
 ```
 
 **After**
@@ -103,7 +105,9 @@ use Rougin\Transcribe\Source\FileSource;
 
 $source = new SourceCollection;
 
-$source->add(new FileSource);
+// ...
+
+$source->add(new FileSource($path));
 ```
 
 ## Change `SourceInterface::getWords` to `SourceInterface::words`
