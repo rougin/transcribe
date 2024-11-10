@@ -6,7 +6,7 @@
 [![Coverage Status][ico-coverage]][link-coverage]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-`Transcribe` is a simple localization package written in PHP. A localization source can be from `.php` files or from a database connection using [PDO](https://www.php.net/manual/en/intro.pdo.php).
+`Transcribe` is a simple localization package written in PHP in which the translated word can be retrieved easily based on the specified locale. A localization source can be from multiple `.php` files or from a database connection using [PDO](https://www.php.net/manual/en/intro.pdo.php).
 
 ## Installation
 
