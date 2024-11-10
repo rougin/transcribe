@@ -37,32 +37,6 @@ class SourceCollection implements SourceInterface
     }
 
     /**
-     * @deprecated since ~0.4, use "add" instead.
-     *
-     * Adds a SourceInterface to the collection.
-     *
-     * @param \Rougin\Transcribe\Source\SourceInterface $source
-     *
-     * @return self
-     */
-    public function addSource(SourceInterface $source)
-    {
-        return $this->add($source);
-    }
-
-    /**
-     * @deprecated since ~0.4, use "words" instead.
-     *
-     * Returns an array of words.
-     *
-     * @return array<string, array<string, string>>
-     */
-    public function getWords()
-    {
-        return $this->words();
-    }
-
-    /**
      * Returns an array of words.
      *
      * @return array<string, array<string, string>>
@@ -73,10 +47,8 @@ class SourceCollection implements SourceInterface
 
         foreach ($this->sources as $source)
         {
-            /** @deprecated since ~0.4, use "words" instead. */
-            $addition = (array) $source->getWords();
-
-            $words = array_merge($words, $addition);
+            /** @var array<string, array<string, string>> */
+            $words = array_merge($words, $source->words());
         }
 
         return $words;

@@ -5,19 +5,12 @@ namespace Rougin\Transcribe\Source;
 use Rougin\Transcribe\Transcribe;
 
 /**
- * Directory Source Test
- *
  * @package Transcribe
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class DirectorySourceTest extends AbstractTestCase
+class FileSourceTest extends AbstractTestCase
 {
-    /**
-     * @var \Rougin\Transcribe\Transcribe
-     */
-    protected $transcribe;
-
     /**
      * @return void
      */
@@ -25,8 +18,8 @@ class DirectorySourceTest extends AbstractTestCase
     {
         $path = str_replace('Source', 'Fixture', __DIR__);
 
-        $source = new DirectorySource($path . '/Locales');
+        $source = new FileSource($path . '/Locales');
 
-        $this->transcribe = new Transcribe($source);
+        $this->app = new Transcribe($source);
     }
 }
