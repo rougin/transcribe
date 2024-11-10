@@ -6,7 +6,7 @@
 [![Coverage Status][ico-coverage]][link-coverage]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-`Transcribe` is a simple localization package written in PHP. A localization source can be file-based (similar to [Laravel's Localization](https://laravel.com/docs/11.x/localization)) or from a database connection using [PDO](https://www.php.net/manual/en/intro.pdo.php).
+`Transcribe` is a simple localization package written in PHP. A localization source can be from `.php` files or from a database connection using [PDO](https://www.php.net/manual/en/intro.pdo.php).
 
 ## Installation
 
@@ -43,9 +43,9 @@ use Rougin\Transcribe\Source\FileSource;
 
 $source = new FileSource;
 
-// Add the directory to the source ---
-$source->add(__DIR__ . '/locales');
-// -----------------------------------
+// Add the directory to the source ----
+$source->addPath(__DIR__ . '/locales');
+// ------------------------------------
 ```
 
 After creating the specified source, use the `get` method from the `Transcribe` class to get the localized word based on its keyword:
@@ -70,14 +70,16 @@ $ php index.php
 pangalan
 ```
 
-Using the `setLocale` method can define the default locale. By setting the default locale, there is no need to specify it when using the `get` method:
+Using the `setLocale` method can define the default locale. Having a default locale, there is no need to specify it when using the `get` method:
 
 ``` php
 // index.php
 
 $transcribe->setLocale('fil_PH');
 
+// No need to specify "fil_PH" ---
 echo $transcribe->get('name');
+// -------------------------------
 ```
 
 ## Using sources
@@ -94,7 +96,7 @@ use Rougin\Transcribe\Source\PdoSource;
 // Create a PDO instance -----------------
 $dsn = 'mysql:host=localhost;dbname=demo';
 
-$pdo = new PDO($dsn, 'root', '');
+$pdo = new PDO($dsn, 'root', /** ... */);
 // ---------------------------------------
 
 $source = new PdoSource($pdo);
@@ -102,7 +104,7 @@ $source = new PdoSource($pdo);
 // ...
 ```
 
-When using the `PdoSource` class, also specify the database table and its columns to be used for getting the localized words:
+When using the `PdoSource` class, it can also specify the database table and its columns to be used for getting the localized words:
 
 ```
 # Contents of the "locales" table
@@ -138,7 +140,7 @@ $source->setTextColumn('text');
 > [!NOTE]
 > If the required table and columns were not specified, its default values are the same from the above-example (e.g., `locales` for table, and `locale`, `name`, and `text` values for the columns).
 
-Then use the same `get` method from `Transcribe` class to get the localized word from the database:
+Then use the same `get` method from `Transcribe` class to get the localized word from the database table:
 
 ``` php
 // index.php
@@ -152,6 +154,8 @@ echo $transcribe->get('fil_PH.name');
 $ php index.php
 pangalan
 ```
+
+## Creating custom sources
 
 To create a custom source, kindly use the `SourceInterface` for its implementation:
 
@@ -168,6 +172,20 @@ interface SourceInterface
     public function words();
 }
 ```
+
+The `words` method should return a list of words in an associative array format:
+
+``` php
+return array(
+    'fil_PH' => array(
+        'language' => 'linguahe',
+        'name' => 'pangalan',
+        'school' => 'paaralan',
+    ),
+);
+```
+
+The specified method will be used a the reference for getting the localized word from the `get` method of `Transcribe` class.
 
 ## Migrating to the `v0.4.0` release
 
