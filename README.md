@@ -6,7 +6,7 @@
 [![Coverage Status][ico-coverage]][link-coverage]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Transcribe is a simple localization package for PHP. A localization source can be file-based (similar to [Laravel's Localization](https://laravel.com/docs/5.7/localization)) or from a database connection.
+`Transcribe` is a simple localization package written in PHP. A localization source can be file-based (similar to [Laravel's Localization](https://laravel.com/docs/11.x/localization)) or from a database connection using [PDO](https://www.php.net/manual/en/intro.pdo.php).
 
 ## Installation
 
@@ -104,6 +104,15 @@ $source = new PdoSource($pdo);
 
 When using the `PdoSource` class, also specify the database table and its columns to be used for getting the localized words:
 
+```
+# Contents of the "locales" table
+
+| `id` | `type` | `name` | `text`   |
+|------|--------|--------|----------|
+| 1    | fil_PH | name   | pangalan |
+| 2    | fil_PH | school | paaralan |
+```
+
 ``` php
 // ...
 
@@ -111,13 +120,13 @@ When using the `PdoSource` class, also specify the database table and its column
 $source->setTableName('locales');
 // -------------------------------------
 
+// Use "type" column from "locales" table ---
+$source->setTypeColumn('type');
+// ------------------------------------------
+
 // Use "name" column from "locales" table ---
 $source->setNameColumn('name');
 // ------------------------------------------
-
-// Use "locale" column from "locales" table ---
-$source->setLocaleColumn('locale');
-// --------------------------------------------
 
 // Use "text" column from "locales" table ---
 $source->setTextColumn('text');
@@ -125,6 +134,9 @@ $source->setTextColumn('text');
 
 // ...
 ```
+
+> [!NOTE]
+> If the required table and columns were not specified, its default values are the same from the above-example (e.g., `locales` for table, and `locale`, `name`, and `text` values for the columns).
 
 Then use the same `get` method from `Transcribe` class to get the localized word from the database:
 
@@ -159,7 +171,7 @@ interface SourceInterface
 
 ## Migrating to the `v0.4.0` release
 
-The new release for `v0.4.0` will be having a [backward compatibility](https://en.wikipedia.org/wiki/Backward_compatibility) break (BC break). With this, some functionalities from the earlier versions might not be working after upgrading. This was done to increase extensibility, simplicity and maintainbility. `Transcribe` is also mentioned in [my blog post](https://roug.in/hello-world-again/):
+The new release for `v0.4.0` will be having a [backward compatibility](https://en.wikipedia.org/wiki/Backward_compatibility) break (BC break). With this, some functionalities from the earlier versions might not be working after upgrading. This was done to increase extensibility, simplicity and maintainbility. One of the packages that requires for BC break was `Transcribe` based on [my blog post](https://roug.in/hello-world-again/):
 
 > I also want to extend this plan to my personal packages as well like [Staticka](https://github.com/staticka/staticka) and [Transcribe](https://github.com/rougin/transcribe). With this, I will introduce backward compatibility breaks to them initially as it is hard to migrate their codebase due to minimal to no documentation being provided in its basic usage and its internals. As I checked their code, I realized that they are also over engineered, which is a mistake that I needed to atone for when updating my packages in the future.
 

@@ -45,6 +45,8 @@ $source = new SourceCollection;
 ``` php
 use Rougin\Transcribe\Source\DatabaseSource;
 
+// ...
+
 $source = new DatabaseSource($pdo);
 ```
 
@@ -53,7 +55,9 @@ $source = new DatabaseSource($pdo);
 ``` php
 use Rougin\Transcribe\Source\PdoSource;
 
-$source = new PdoSource;
+// ...
+
+$source = new PdoSource($pdo);
 ```
 
 ## Change `DirectorySource` to `FileSource`
@@ -63,7 +67,9 @@ $source = new PdoSource;
 ``` php
 use Rougin\Transcribe\Source\DirectorySource;
 
-$source = new DirectorySource($pdo);
+// ...
+
+$source = new DirectorySource($path);
 ```
 
 **After**
@@ -71,7 +77,9 @@ $source = new DirectorySource($pdo);
 ``` php
 use Rougin\Transcribe\Source\FileSource;
 
-$source = new FileSource;
+// ...
+
+$source = new FileSource($path);
 ```
 
 ## Change `SourceCollection::addSource` to `SourceCollection::add`
@@ -107,6 +115,9 @@ namespace Rougin\Transcribe\Source;
 
 interface SourceInterface
 {
+    /**
+     * @return array<string, array<string, string>>
+     */
     public function getWords();
 }
 ```
@@ -118,6 +129,9 @@ namespace Rougin\Transcribe\Source;
 
 interface SourceInterface
 {
+    /**
+     * @return array<string, array<string, string>>
+     */
     public function words();
 }
 ```
@@ -157,8 +171,7 @@ $words = $transcribe->words();
 ``` php
 use Rougin\Transcribe\Transcribe;
 
-/** @var \Rougin\Transcribe\Source\SourceInterface */
-$source = /** ... */;
+// ...
 
 $transcribe = new Transcribe($source);
 
@@ -171,8 +184,7 @@ $text = $transcribe->getText('fil_PH.name');
 ``` php
 use Rougin\Transcribe\Transcribe;
 
-/** @var \Rougin\Transcribe\Source\SourceInterface */
-$source = /** ... */;
+// ...
 
 $transcribe = new Transcribe($source);
 
