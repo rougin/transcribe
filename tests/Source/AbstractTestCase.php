@@ -14,7 +14,7 @@ class AbstractTestCase extends Testcase
     /**
      * @var \Rougin\Transcribe\Transcribe
      */
-    protected $transcribe;
+    protected $app;
 
     /**
      * Sets up the library.
@@ -29,11 +29,29 @@ class AbstractTestCase extends Testcase
     /**
      * @return void
      */
+    public function test_get_all_defined_words()
+    {
+        $expected = array('fil_PH' => array());
+
+        $expected['fil_PH']['language'] = 'linguahe';
+
+        $expected['fil_PH']['name'] = 'pangalan';
+
+        $expected['fil_PH']['school'] = 'paaralan';
+
+        $result = $this->app->all();
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @return void
+     */
     public function test_get_text_from_file()
     {
         $expected = (string) 'pangalan';
 
-        $result = $this->transcribe->getText('fil_PH.name');
+        $result = $this->app->get('fil_PH.name');
 
         $this->assertEquals($expected, $result);
     }
@@ -45,27 +63,7 @@ class AbstractTestCase extends Testcase
     {
         $expected = (string) 'test';
 
-        $result = $this->transcribe->getText('test');
-
-        $this->assertEquals($expected, $result);
-    }
-
-    /**
-     * Tests Transcribe::getVocabulary.
-     *
-     * @return void
-     */
-    public function test_get_all_defined_words()
-    {
-        $expected = array('fil_PH' => array());
-
-        $expected['fil_PH']['language'] = 'linguahe';
-
-        $expected['fil_PH']['name'] = 'pangalan';
-
-        $expected['fil_PH']['school'] = 'paaralan';
-
-        $result = $this->transcribe->getVocabulary();
+        $result = $this->app->get('test');
 
         $this->assertEquals($expected, $result);
     }

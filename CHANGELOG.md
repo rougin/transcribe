@@ -4,23 +4,16 @@ All notable changes to `Transcribe` will be documented in this file.
 
 ## [0.4.0](https://github.com/rougin/transcribe/compare/v0.3.1...v0.4.0) - Unreleased
 
-### Added
-- `SourceCollection::add`
-- `SourceInterface::words`
-- `Transcribe::all`
-- `Transcribe::get`
+> [!WARNING]
+> This release will introduce a backward compatability break if upgrading from `v0.3.0` release.
 
 ### Changed
+- Code coverage to `Codecov`
+- Code documentation by `php-cs-fixer`
+- Improved code quality by `phpstan`
 - Minimum version of PHP to `v5.3.0`
-- Code documentation by `php-cs-fixer`, code quality by `phpstan`
-- Workflow from `Travis CI` to `Github Actions`
-- Code coverage from `Scrutinizer CI` to `Codecov`
-
-### Deprecated
-- `SourceCollection::addSource`
-- `SourceInterface::getWords`
-- `Transcribe::getText`
-- `Transcribe::getVocabulary`
+- Simplified code structure
+- Workflow to `Github Actions`
 
 ### Removed
 - `CONTRIBUTING.md`

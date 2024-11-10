@@ -5,19 +5,12 @@ namespace Rougin\Transcribe\Source;
 use Rougin\Transcribe\Transcribe;
 
 /**
- * Source Collection Test
- *
  * @package Transcribe
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class SourceCollectionTest extends AbstractTestCase
 {
-    /**
-     * @var \Rougin\Transcribe\Transcribe
-     */
-    protected $transcribe;
-
     /**
      * @return void
      */
@@ -35,12 +28,12 @@ class SourceCollectionTest extends AbstractTestCase
 
         $table['translation'] = 'translation';
 
-        $source = new MultipleSource;
+        $source = new SourceCollection;
 
-        $source->addSource(new DatabaseSource($pdo, $table));
+        $source->add(new PdoSource($pdo, $table));
 
-        $source->addSource(new DirectorySource($path . '/Locales'));
+        $source->add(new FileSource($path . '/Locales'));
 
-        $this->transcribe = new Transcribe($source);
+        $this->app = new Transcribe($source);
     }
 }

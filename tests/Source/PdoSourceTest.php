@@ -5,13 +5,11 @@ namespace Rougin\Transcribe\Source;
 use Rougin\Transcribe\Transcribe;
 
 /**
- * Database Source Test
- *
  * @package Transcribe
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class DatabaseSourceTest extends AbstractTestCase
+class PdoSourceTest extends AbstractTestCase
 {
     /**
      * @return void
@@ -30,8 +28,8 @@ class DatabaseSourceTest extends AbstractTestCase
 
         $table['translation'] = 'translation';
 
-        $source = new DatabaseSource($pdo, $table);
+        $source = new PdoSource($pdo, $table);
 
-        $this->transcribe = new Transcribe($source);
+        $this->app = new Transcribe($source);
     }
 }

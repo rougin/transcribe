@@ -26,10 +26,11 @@ class Transcribe
      */
     public function __construct(SourceInterface $source)
     {
-        /** @deprecated since ~0.4, use "words" instead. */
-        $this->words = $source->getWords();
+        $words = $source->words();
 
-        $this->parsed = $this->parse($this->words);
+        $this->parsed = $this->parse($words);
+
+        $this->words = $words;
     }
 
     /**
@@ -61,32 +62,6 @@ class Transcribe
     }
 
     /**
-     * @deprecated since ~0.4, use "get" instead.
-     *
-     * Returns the specified text from an array of words.
-     *
-     * @param string $text
-     *
-     * @return string
-     */
-    public function getText($text)
-    {
-        return $this->get($text);
-    }
-
-    /**
-     * @deprecated since ~0.4, use "all" instead.
-     *
-     * Returns all words stored from the source.
-     *
-     * @return array<string, array<string, string>>
-     */
-    public function getVocabulary()
-    {
-        return $this->all();
-    }
-
-    /**
      * Converts the data into dot notation values.
      *
      * @param array<string, mixed> $data
@@ -110,6 +85,7 @@ class Transcribe
 
             $output = $this->parse($value, $result, $field . '.');
 
+            /** @var array<string, mixed> */
             $result = array_merge($result, $output);
         }
 

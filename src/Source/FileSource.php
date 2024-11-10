@@ -7,36 +7,24 @@ namespace Rougin\Transcribe\Source;
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class DirectorySource implements SourceInterface
+class FileSource implements SourceInterface
 {
     /**
      * @var \SplFileInfo[]
      */
-    protected $iterator;
+    protected $items;
 
     /**
      * @param string $path
      */
     public function __construct($path)
     {
-        $directory = new \RecursiveDirectoryIterator($path, 4096);
+        $files = new \RecursiveDirectoryIterator($path, 4096);
 
         /** @var \SplFileInfo[] */
-        $iterator = new \RecursiveIteratorIterator($directory, 1);
+        $items = new \RecursiveIteratorIterator($files, 1);
 
-        $this->iterator = $iterator;
-    }
-
-    /**
-     * @deprecated since ~0.4, use "words" instead.
-     *
-     * Returns an array of words.
-     *
-     * @return array<string, array<string, string>>
-     */
-    public function getWords()
-    {
-        return $this->words();
+        $this->items = $items;
     }
 
     /**
@@ -48,7 +36,7 @@ class DirectorySource implements SourceInterface
     {
         $items = array();
 
-        foreach ($this->iterator as $file)
+        foreach ($this->items as $file)
         {
             $filename = $file->getFilename();
 

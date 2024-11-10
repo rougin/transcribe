@@ -7,7 +7,7 @@ namespace Rougin\Transcribe\Source;
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class DatabaseSource implements SourceInterface
+class PdoSource implements SourceInterface
 {
     /**
      * @var \PDO
@@ -33,18 +33,6 @@ class DatabaseSource implements SourceInterface
         $this->pdo = $pdo;
 
         $this->table = $table;
-    }
-
-    /**
-     * @deprecated since ~0.4, use "words" instead.
-     *
-     * Returns an array of words.
-     *
-     * @return array<string, array<string, string>>
-     */
-    public function getWords()
-    {
-        return $this->words();
     }
 
     /**
