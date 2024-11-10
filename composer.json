@@ -1,7 +1,7 @@
 {
   "name": "rougin/transcribe",
-  "description": "An simple localization package for PHP.",
-  "keywords": ["language", "localization", "transcribe", "php"],
+  "description": "A simple localization package for PHP.",
+  "keywords": [ "php-l10n", "php-locale", "translation" ],
   "homepage": "https://roug.in/transcribe/",
   "license": "MIT",
   "authors":
