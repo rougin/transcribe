@@ -84,7 +84,7 @@ echo $transcribe->get('name');
 
 ## Using sources
 
-The previous example uses the `FileSource` that uses `.php` files to load the localized words. But `Transcribe` also provides a way in getting the said localized words through a database using the `PdoSource`:
+The previous example uses the `FileSource` which uses `.php` files in getting localized words. But `Transcribe` also provides a way in getting the said localized words through a database using the `PdoSource`:
 
 ``` php
 // index.php
@@ -185,11 +185,11 @@ return array(
 );
 ```
 
-The specified method will be used a the reference for getting the localized word from the `get` method of `Transcribe` class.
+The specified method will be used as the reference for finding the localized word from the `get` method of `Transcribe` class.
 
 ## Migrating to the `v0.4.0` release
 
-The new release for `v0.4.0` will be having a [backward compatibility](https://en.wikipedia.org/wiki/Backward_compatibility) break (BC break). With this, some functionalities from the earlier versions might not be working after upgrading. This was done to increase extensibility, simplicity and maintainbility. One of the packages that requires for BC break was `Transcribe` based on [my blog post](https://roug.in/hello-world-again/):
+The new release for `v0.4.0` will be having a [backward compatibility](https://en.wikipedia.org/wiki/Backward_compatibility) break (BC break). With this, some functionalities from the earlier versions might not be working after upgrading. This was done to increase extensibility, simplicity and maintainbility. This was discussed in one of [my blog post](https://roug.in/hello-world-again/) which also mentions `Transcribe`:
 
 > I also want to extend this plan to my personal packages as well like [Staticka](https://github.com/staticka/staticka) and [Transcribe](https://github.com/rougin/transcribe). With this, I will introduce backward compatibility breaks to them initially as it is hard to migrate their codebase due to minimal to no documentation being provided in its basic usage and its internals. As I checked their code, I realized that they are also over engineered, which is a mistake that I needed to atone for when updating my packages in the future.
 
