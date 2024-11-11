@@ -16,19 +16,19 @@ class PdoSourceTest extends AbstractTestCase
      */
     public function doSetUp()
     {
-        $path = str_replace('Source', 'Fixture', __DIR__);
+        $path = __DIR__ . '/../Fixture/Storage';
 
-        $pdo = new \PDO('sqlite:' . $path . '/database.db');
+        $pdo = new \PDO('sqlite:' . $path . '/trnscrb.db');
 
-        $table = array('name' => 'word');
+        $source = new PdoSource($pdo);
 
-        $table['language'] = 'language';
+        $source->setTableName('word');
 
-        $table['text'] = (string) 'text';
+        $source->setTextColumn('translation');
 
-        $table['translation'] = 'translation';
+        $source->setTypeColumn('language');
 
-        $source = new PdoSource($pdo, $table);
+        $source->setNameColumn('text');
 
         $this->app = new Transcribe($source);
     }

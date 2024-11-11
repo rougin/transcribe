@@ -10,65 +10,160 @@ namespace Rougin\Transcribe\Source;
 class PdoSource implements SourceInterface
 {
     /**
+     * @var string
+     */
+    protected $name;
+
+    /**
      * @var \PDO
      */
     protected $pdo;
 
     /**
-     * @var array<string, string>
+     * @var string
      */
     protected $table;
 
     /**
-     * @var array<string, array<string, string>>
+     * @var string
      */
-    protected $words = array();
+    protected $text;
 
     /**
-     * @param \PDO                  $pdo
-     * @param array<string, string> $table
+     * @var string
      */
-    public function __construct(\PDO $pdo, array $table)
+    protected $type;
+
+    /**
+     * @param \PDO $pdo
+     */
+    public function __construct(\PDO $pdo)
     {
+        $this->setNameColumn('name');
+
         $this->pdo = $pdo;
 
-        $this->table = $table;
+        $this->setTableName('locales');
+
+        $this->setTextColumn('text');
+
+        $this->setTypeColumn('type');
     }
 
     /**
-     * Returns an array of words.
+     * @return string
+     */
+    public function getNameColumn()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->table;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColumn()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeColumn()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $name
      *
+     * @return self
+     */
+    public function setNameColumn($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param string $table
+     *
+     * @return self
+     */
+    public function setTableName($table)
+    {
+        $this->table = $table;
+
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     *
+     * @return self
+     */
+    public function setTextColumn($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return self
+     */
+    public function setTypeColumn($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
      * @return array<string, array<string, string>>
      */
     public function words()
     {
-        $query = 'SELECT * FROM ' . $this->table['name'];
+        // TODO: Be able to customize the query if needed ---
+        $query = 'SELECT * FROM ' . $this->getTableName();
+        // --------------------------------------------------
 
         $table = $this->pdo->prepare($query);
 
         $table->execute();
 
-        $fields = $this->table;
-
         /** @var array<string, string>[] */
         $items = $table->fetchAll(\PDO::FETCH_ASSOC);
 
+        $words = array();
+
         foreach ($items as $row)
         {
-            $group = $row[$fields['language']];
+            $group = $row[$this->getTypeColumn()];
 
-            if (! isset($this->words[$group]))
+            if (! isset($words[$group]))
             {
-                $this->words[$group] = array();
+                $words[$group] = array();
             }
 
-            $translation = $row[$fields['translation']];
+            $locale = $row[$this->getTextColumn()];
 
-            $text = (string) $row[$fields['text']];
+            $text = $row[$this->getNameColumn()];
 
-            $this->words[$group][$text] = $translation;
+            $words[$group][$text] = $locale;
         }
 
-        return $this->words;
+        return $words;
     }
 }

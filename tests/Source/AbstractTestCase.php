@@ -39,9 +39,9 @@ class AbstractTestCase extends Testcase
 
         $expected['fil_PH']['school'] = 'paaralan';
 
-        $result = $this->app->all();
+        $actual = $this->app->all();
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -49,11 +49,11 @@ class AbstractTestCase extends Testcase
      */
     public function test_get_text_from_file()
     {
-        $expected = (string) 'pangalan';
+        $expected = 'pangalan';
 
-        $result = $this->app->get('fil_PH.name');
+        $actual = $this->app->get('fil_PH.name');
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -61,10 +61,24 @@ class AbstractTestCase extends Testcase
      */
     public function test_nonexistant_text()
     {
-        $expected = (string) 'test';
+        $expected = 'test';
 
-        $result = $this->app->get('test');
+        $actual = $this->app->get('test');
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_set_default_locale()
+    {
+        $expected = 'pangalan';
+
+        $this->app->setLocale('fil_PH');
+
+        $actual = $this->app->get('name');
+
+        $this->assertEquals($expected, $actual);
     }
 }

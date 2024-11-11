@@ -14,7 +14,12 @@ class Transcribe
     /**
      * @var array<string, mixed>
      */
-    protected $parsed = array();
+    protected $items = array();
+
+    /**
+     * @var string|null
+     */
+    protected $locale = null;
 
     /**
      * @var array<string, array<string, string>>
@@ -28,7 +33,7 @@ class Transcribe
     {
         $words = $source->words();
 
-        $this->parsed = $this->parse($words);
+        $this->items = $this->parse($words);
 
         $this->words = $words;
     }
@@ -52,13 +57,32 @@ class Transcribe
      */
     public function get($text)
     {
-        if (! isset($this->parsed[$text]))
+        if ($this->locale)
         {
-            $this->parsed[$text] = $text;
+            $text = $this->locale . '.' . $text;
+        }
+
+        if (! isset($this->items[$text]))
+        {
+            $this->items[$text] = $text;
         }
 
         /** @var string */
-        return $this->parsed[$text];
+        return $this->items[$text];
+    }
+
+    /**
+     * Sets the default locale to be used.
+     *
+     * @param string $locale
+     *
+     * @return self
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 
     /**
@@ -74,7 +98,7 @@ class Transcribe
     {
         foreach ($data as $name => $value)
         {
-            $field = (string) $key . $name;
+            $field = $key . $name;
 
             if (! is_array($value))
             {

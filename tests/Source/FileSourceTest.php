@@ -16,9 +16,11 @@ class FileSourceTest extends AbstractTestCase
      */
     public function doSetUp()
     {
-        $path = str_replace('Source', 'Fixture', __DIR__);
+        $source = new FileSource;
 
-        $source = new FileSource($path . '/Locales');
+        $path = __DIR__ . '/../Fixture/Locales';
+
+        $source->addPath($path);
 
         $this->app = new Transcribe($source);
     }

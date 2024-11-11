@@ -2,6 +2,10 @@
 
 namespace Rougin\Transcribe\Source;
 
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+
 /**
  * @package Transcribe
  *
@@ -10,33 +14,32 @@ namespace Rougin\Transcribe\Source;
 class FileSource implements SourceInterface
 {
     /**
-     * @var \SplFileInfo[]
+     * @var string[]
      */
-    protected $items;
+    protected $paths = array();
 
     /**
      * @param string $path
+     *
+     * @return self
      */
-    public function __construct($path)
+    public function addPath($path)
     {
-        $files = new \RecursiveDirectoryIterator($path, 4096);
+        $this->paths[] = $path;
 
-        /** @var \SplFileInfo[] */
-        $items = new \RecursiveIteratorIterator($files, 1);
-
-        $this->items = $items;
+        return $this;
     }
 
     /**
-     * Returns an array of words.
-     *
      * @return array<string, array<string, string>>
      */
     public function words()
     {
-        $items = array();
+        $files = $this->getFiles();
 
-        foreach ($this->items as $file)
+        $words = array();
+
+        foreach ($files as $file)
         {
             $filename = $file->getFilename();
 
@@ -47,10 +50,37 @@ class FileSource implements SourceInterface
 
             if (! $file->isDir())
             {
-                $items[$group] = require $realpath;
+                $words[$group] = require $realpath;
             }
         }
 
-        return $items;
+        return $words;
+    }
+
+    /**
+     * @return \SplFileInfo[]
+     */
+    protected function getFiles()
+    {
+        $files = array();
+
+        $skip = FilesystemIterator::SKIP_DOTS;
+
+        $first = RecursiveIteratorIterator::SELF_FIRST;
+
+        foreach ($this->paths as $path)
+        {
+            $paths = new RecursiveDirectoryIterator($path, $skip);
+
+            /** @var \SplFileInfo[] */
+            $items = new RecursiveIteratorIterator($paths, $first);
+
+            foreach ($items as $item)
+            {
+                $files[] = $item;
+            }
+        }
+
+        return $files;
     }
 }
