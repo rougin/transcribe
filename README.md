@@ -70,7 +70,7 @@ $ php index.php
 pangalan
 ```
 
-Using the `setLocale` method can define the default locale. Having a default locale, there is no need to specify it when using the `get` method:
+Using the `setLocale` method can define the default locale. With this, there is no need to specify it when using the `get` method:
 
 ``` php
 // index.php
@@ -138,7 +138,7 @@ $source->setTextColumn('text');
 ```
 
 > [!NOTE]
-> If the required table and columns were not specified, its default values are the same from the above-example (e.g., `locales` for table, and `locale`, `name`, and `text` values for the columns).
+> If the required table and columns were not specified, its default values are the same from the above-example (e.g., `locales` for table, and `type`, `name`, and `text` values for the columns).
 
 Then use the same `get` method from `Transcribe` class to get the localized word from the database table:
 
