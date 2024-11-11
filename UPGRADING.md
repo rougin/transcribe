@@ -38,6 +38,28 @@ use Rougin\Transcribe\Source\SourceCollection;
 $source = new SourceCollection;
 ```
 
+## Change `Transcribe` to `Locale`
+
+**Before**
+
+``` php
+use Rougin\Transcribe\Transcribe;
+
+// ...
+
+$locale = new Transcribe($source);
+```
+
+**After**
+
+``` php
+use Rougin\Transcribe\Locale;
+
+// ...
+
+$locale = new Locale($source);
+```
+
 ## Change `DatabaseSource` to `PdoSource`
 
 **Before**
@@ -140,7 +162,7 @@ interface SourceInterface
 }
 ```
 
-## Change `Transcribe::getVocabulary` to `Transcribe::all`
+## Change `Transcribe::getVocabulary` to `Locale::all`
 
 **Before**
 
@@ -149,26 +171,26 @@ use Rougin\Transcribe\Transcribe;
 
 // ...
 
-$transcribe = new Transcribe($source);
+$locale = new Transcribe($source);
 
 /** @var array<string, array<string, string>> */
-$words = $transcribe->getVocabulary();
+$words = $locale->getVocabulary();
 ```
 
 **After**
 
 ``` php
-use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Locale;
 
 // ...
 
-$transcribe = new Transcribe($source);
+$locale = new Locale($source);
 
 /** @var array<string, array<string, string>> */
-$words = $transcribe->words();
+$words = $locale->words();
 ```
 
-## Change `Transcribe::getText` to `Transcribe::get`
+## Change `Transcribe::getText` to `Locale::get`
 
 **Before**
 
@@ -177,20 +199,20 @@ use Rougin\Transcribe\Transcribe;
 
 // ...
 
-$transcribe = new Transcribe($source);
+$locale = new Transcribe($source);
 
 /** @var string */
-$text = $transcribe->getText('fil_PH.name');
+$text = $locale->getText('fil_PH.name');
 ```
 
 **After**
 
 ``` php
-use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Locale;
 
 // ...
 
-$transcribe = new Transcribe($source);
+$locale = new Locale($source);
 
-$transcribe->get('fil_PH.name');
+$locale->get('fil_PH.name');
 ```

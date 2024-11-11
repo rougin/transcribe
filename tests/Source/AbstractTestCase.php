@@ -12,9 +12,9 @@ use Rougin\Transcribe\Testcase;
 class AbstractTestCase extends Testcase
 {
     /**
-     * @var \Rougin\Transcribe\Transcribe
+     * @var \Rougin\Transcribe\Locale
      */
-    protected $app;
+    protected $locale;
 
     /**
      * Sets up the library.
@@ -39,7 +39,7 @@ class AbstractTestCase extends Testcase
 
         $expected['fil_PH']['school'] = 'paaralan';
 
-        $actual = $this->app->all();
+        $actual = $this->locale->all();
 
         $this->assertEquals($expected, $actual);
     }
@@ -51,7 +51,7 @@ class AbstractTestCase extends Testcase
     {
         $expected = 'pangalan';
 
-        $actual = $this->app->get('fil_PH.name');
+        $actual = $this->locale->get('fil_PH.name');
 
         $this->assertEquals($expected, $actual);
     }
@@ -63,7 +63,7 @@ class AbstractTestCase extends Testcase
     {
         $expected = 'test';
 
-        $actual = $this->app->get('test');
+        $actual = $this->locale->get('test');
 
         $this->assertEquals($expected, $actual);
     }
@@ -75,9 +75,9 @@ class AbstractTestCase extends Testcase
     {
         $expected = 'pangalan';
 
-        $this->app->setLocale('fil_PH');
+        $this->locale->setDefault('fil_PH');
 
-        $actual = $this->app->get('name');
+        $actual = $this->locale->get('name');
 
         $this->assertEquals($expected, $actual);
     }

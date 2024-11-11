@@ -9,7 +9,7 @@ use Rougin\Transcribe\Source\SourceInterface;
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class Transcribe
+class Locale
 {
     /**
      * @var array<string, mixed>
@@ -19,7 +19,7 @@ class Transcribe
     /**
      * @var string|null
      */
-    protected $locale = null;
+    protected $default = null;
 
     /**
      * @var array<string, array<string, string>>
@@ -57,9 +57,9 @@ class Transcribe
      */
     public function get($text)
     {
-        if ($this->locale)
+        if ($this->default)
         {
-            $text = $this->locale . '.' . $text;
+            $text = $this->default . '.' . $text;
         }
 
         if (! isset($this->items[$text]))
@@ -74,13 +74,13 @@ class Transcribe
     /**
      * Sets the default locale to be used.
      *
-     * @param string $locale
+     * @param string $default
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setDefault($default)
     {
-        $this->locale = $locale;
+        $this->default = $default;
 
         return $this;
     }

@@ -48,21 +48,21 @@ $source->addPath(__DIR__ . '/locales');
 // ------------------------------------
 ```
 
-After creating the specified source, use the `get` method from the `Transcribe` class to get the localized word based on its keyword:
+After creating the specified source, use the `get` method from the `Locale` class to get the localized word based on its keyword:
 
 ``` php
 // index.php
 
-use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Locale;
 
 // ...
 
 /** @var \Rougin\Transcribe\Source\FileSource */
 $source = /** ... */;
 
-$transcribe = new Transcribe($source);
+$locale = new Locale($source);
 
-echo $transcribe->get('fil_PH.name');
+echo $locale->get('fil_PH.name');
 ```
 
 ``` bash
@@ -70,15 +70,15 @@ $ php index.php
 pangalan
 ```
 
-Using the `setLocale` method can define the default locale. With this, there is no need to specify it when using the `get` method:
+Using the `setDefault` method can define the default locale. With this, there is no need to specify it when using the `get` method:
 
 ``` php
 // index.php
 
-$transcribe->setLocale('fil_PH');
+$locale->setDefault('fil_PH');
 
 // No need to specify "fil_PH" ---
-echo $transcribe->get('name');
+echo $locale->get('name');
 // -------------------------------
 ```
 
@@ -140,14 +140,14 @@ $source->setTextColumn('text');
 > [!NOTE]
 > If the required table and columns were not specified, its default values are the same from the above-example (e.g., `locales` for table, and `type`, `name`, and `text` values for the columns).
 
-Then use the same `get` method from `Transcribe` class to get the localized word from the database table:
+Then use the same `get` method from `Locale` class to get the localized word from the database table:
 
 ``` php
 // index.php
 
 // ...
 
-echo $transcribe->get('fil_PH.name');
+echo $locale->get('fil_PH.name');
 ```
 
 ``` bash
@@ -185,7 +185,7 @@ return array(
 );
 ```
 
-The specified method will be used as the reference for finding the localized word from the `get` method of `Transcribe` class.
+The specified method will be used as the reference for finding the localized word from the `get` method of `Locale` class.
 
 ## Migrating to the `v0.4.0` release
 

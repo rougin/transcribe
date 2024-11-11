@@ -2,7 +2,7 @@
 
 namespace Rougin\Transcribe\Source;
 
-use Rougin\Transcribe\Transcribe;
+use Rougin\Transcribe\Locale;
 
 /**
  * @package Transcribe
@@ -22,6 +22,6 @@ class FileSourceTest extends AbstractTestCase
 
         $source->addPath($path);
 
-        $this->app = new Transcribe($source);
+        $this->locale = new Locale($source);
     }
 }

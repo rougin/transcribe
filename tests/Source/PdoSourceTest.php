@@ -2,6 +2,7 @@
 
 namespace Rougin\Transcribe\Source;
 
+use Rougin\Transcribe\Locale;
 use Rougin\Transcribe\Transcribe;
 
 /**
@@ -30,6 +31,6 @@ class PdoSourceTest extends AbstractTestCase
 
         $source->setNameColumn('text');
 
-        $this->app = new Transcribe($source);
+        $this->locale = new Locale($source);
     }
 }
