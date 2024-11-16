@@ -16,7 +16,6 @@ All notable changes to `Transcribe` will be documented in this file.
 - Workflow to `Github Actions`
 
 ### Removed
-- `CONTRIBUTING.md`
 - `tebru/multi-array` package
 
 ## [0.3.1](https://github.com/rougin/transcribe/compare/v0.3.0...v0.3.1) - 2016-09-11
