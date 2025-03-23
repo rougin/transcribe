@@ -2,7 +2,7 @@
 
 All notable changes to `Transcribe` will be documented in this file.
 
-## [0.4.0](https://github.com/rougin/transcribe/compare/v0.3.1...v0.4.0) - Unreleased
+## [0.4.0](https://github.com/rougin/transcribe/compare/v0.3.1...v0.4.0) - 2025-03-23
 
 > [!WARNING]
 > This release will introduce a backward compatability break if upgrading from `v0.3.0` release.
