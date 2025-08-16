@@ -3,7 +3,7 @@
 $texts = array();
 
 $texts['language'] = 'linguahe';
-$texts['name'] = 'panga';
+$texts['name'] = 'pangalan';
 $texts['school'] = 'paaralan';
 
 return $texts;
