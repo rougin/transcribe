@@ -41,17 +41,24 @@ class FileSource implements SourceInterface
 
         foreach ($files as $file)
         {
-            $filename = $file->getFilename();
+            $name = $file->getFilename();
 
-            /** @var string */
-            $realpath = $file->getRealPath();
-
-            $group = str_replace('.php', '', $filename);
-
-            if (! $file->isDir())
+            if (! $path = $file->getRealPath())
             {
-                $words[$group] = require $realpath;
+                continue;
             }
+
+            $group = str_replace('.php', '', $name);
+
+            if ($file->isDir())
+            {
+                continue;
+            }
+
+            /** @var array<string, string> */
+            $temp = require $path;
+
+            $words[$group] = $temp;
         }
 
         return $words;
@@ -64,20 +71,22 @@ class FileSource implements SourceInterface
     {
         $files = array();
 
-        $skip = FilesystemIterator::SKIP_DOTS;
+        $mode = RecursiveIteratorIterator::SELF_FIRST;
 
-        $first = RecursiveIteratorIterator::SELF_FIRST;
+        $skip = FilesystemIterator::SKIP_DOTS;
 
         foreach ($this->paths as $path)
         {
             $paths = new RecursiveDirectoryIterator($path, $skip);
 
-            /** @var \SplFileInfo[] */
-            $items = new RecursiveIteratorIterator($paths, $first);
+            $items = new RecursiveIteratorIterator($paths, $mode);
 
             foreach ($items as $item)
             {
-                $files[] = $item;
+                if ($item instanceof \SplFileInfo)
+                {
+                    $files[] = $item;
+                }
             }
         }
 
