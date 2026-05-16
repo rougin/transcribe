@@ -8,6 +8,21 @@
 
 `Transcribe` is a simple localization package written in PHP in which the translated word can be retrieved easily based on the specified locale. A localization source can be from multiple `.php` files or from a database connection using [PDO](https://www.php.net/manual/en/intro.pdo.php).
 
+``` php
+use Rougin\Transcribe\Locale;
+use Rougin\Transcribe\Source\FileSource;
+
+$source = new FileSource;
+
+$source->addPath(__DIR__ . '/locales');
+
+$locale = new Locale($source);
+
+// Returns the "pangalan" text ---
+echo $locale->get('fil_PH.name');
+// -------------------------------
+```
+
 ## Installation
 
 Install the `Transcribe` package via [Composer](https://getcomposer.org/):
@@ -155,7 +170,7 @@ $ php index.php
 pangalan
 ```
 
-## Creating custom sources
+## Custom sources
 
 To create a custom source, kindly use the `SourceInterface` for its implementation:
 
@@ -199,15 +214,9 @@ Please see [Pull Request #1](https://github.com/rougin/transcribe/pull/1) for th
 
 Please see [CHANGELOG][link-changelog] for more information what has changed recently.
 
-## Testing
+## Contributing
 
-``` bash
-$ composer test
-```
-
-## Credits
-
-- [All contributors][link-contributors]
+See [CONTRIBUTING](CONTRIBUTING.md) on how to contribute.
 
 ## License
 
