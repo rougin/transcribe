@@ -3,14 +3,13 @@
 namespace Rougin\Transcribe\Source;
 
 use Rougin\Transcribe\Locale;
-use Rougin\Transcribe\Transcribe;
 
 /**
  * @package Transcribe
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class SourceCollectionTest extends AbstractTestCase
+class SourceCollectionTest extends AbstractTestcase
 {
     /**
      * @return void
@@ -19,29 +18,33 @@ class SourceCollectionTest extends AbstractTestCase
     {
         $source = new SourceCollection;
 
-        // Add the PdoSource class ------------------------
-        $path = __DIR__ . '/../Fixture/Storage';
+        $path = __DIR__ . '/../Fixture/Storage/trnscrb.db';
 
-        $pdo = new \PDO('sqlite:' . $path . '/trnscrb.db');
+        $pdo = new \PDO('sqlite:' . $path);
 
+        // Initialize the "PdoSource" -----
         $pdo = new PdoSource($pdo);
-
-        $pdo->setTypeColumn('language');
-
-        $pdo->setTextColumn('translation');
 
         $pdo->setNameColumn('text');
 
-        $source->add($pdo->setTableName('word'));
-        // ------------------------------------------------
+        $pdo->setTableName('word');
 
-        // Add the FileSource class ------------
+        $pdo->setTextColumn('translation');
+
+        $pdo->setTypeColumn('language');
+        // --------------------------------
+
+        $source->add($pdo);
+
+        // Initialize the "FileSource" ---------
         $file = new FileSource;
 
         $path = __DIR__ . '/../Fixture/Locales';
 
-        $source->add($file->addPath($path));
+        $file->addPath($path);
         // -------------------------------------
+
+        $source->add($file);
 
         $this->locale = new Locale($source);
     }

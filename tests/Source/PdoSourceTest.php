@@ -3,24 +3,24 @@
 namespace Rougin\Transcribe\Source;
 
 use Rougin\Transcribe\Locale;
-use Rougin\Transcribe\Transcribe;
 
 /**
  * @package Transcribe
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class PdoSourceTest extends AbstractTestCase
+class PdoSourceTest extends AbstractTestcase
 {
     /**
      * @return void
      */
     public function doSetUp()
     {
-        $path = __DIR__ . '/../Fixture/Storage';
+        $path = __DIR__ . '/../Fixture/Storage/trnscrb.db';
 
-        $pdo = new \PDO('sqlite:' . $path . '/trnscrb.db');
+        $pdo = new \PDO('sqlite:' . $path);
 
+        // Initialize with custom details ----
         $source = new PdoSource($pdo);
 
         $source->setTableName('word');
@@ -30,6 +30,7 @@ class PdoSourceTest extends AbstractTestCase
         $source->setTypeColumn('language');
 
         $source->setNameColumn('text');
+        // -----------------------------------
 
         $this->locale = new Locale($source);
     }

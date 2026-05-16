@@ -41,24 +41,36 @@ class FileSource implements SourceInterface
 
         foreach ($files as $file)
         {
-            $name = $file->getFilename();
-
-            if (! $path = $file->getRealPath())
-            {
-                continue;
-            }
-
-            $group = str_replace('.php', '', $name);
-
             if ($file->isDir())
             {
                 continue;
             }
 
-            /** @var array<string, string> */
-            $temp = require $path;
+            $name = $file->getFilename();
 
-            $words[$group] = $temp;
+            $group = str_replace('.php', '', $name);
+
+            // Extract data from the file ---
+            $data = array();
+
+            if ($path = $file->getRealPath())
+            {
+                $data = require $path;
+            }
+            // ------------------------------
+
+            if (! is_array($data))
+            {
+                continue;
+            }
+
+            foreach ($data as $key => $text)
+            {
+                if (is_string($key) && is_string($text))
+                {
+                    $words[$group][$key] = $text;
+                }
+            }
         }
 
         return $words;
