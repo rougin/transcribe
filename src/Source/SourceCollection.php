@@ -45,10 +45,14 @@ class SourceCollection implements SourceInterface
     {
         $words = array();
 
-        foreach ($this->sources as $source)
+        foreach ($this->sources as $item)
         {
-            /** @var array<string, array<string, string>> */
-            $words = array_merge($words, $source->words());
+            $items = $item->words();
+
+            foreach ($items as $group => $texts)
+            {
+                $words[$group] = $texts;
+            }
         }
 
         return $words;
