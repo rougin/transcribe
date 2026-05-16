@@ -29,11 +29,6 @@ class FakeFolder
 
     public function __destruct()
     {
-        if (! is_dir($this->root))
-        {
-            return;
-        }
-
         $root = $this->root;
 
         // Initialize the directory iterator ---------------
