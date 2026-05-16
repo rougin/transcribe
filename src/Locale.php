@@ -12,7 +12,7 @@ use Rougin\Transcribe\Source\SourceInterface;
 class Locale
 {
     /**
-     * @var array<string, mixed>
+     * @var array<string, string>
      */
     protected $items = array();
 
@@ -67,7 +67,6 @@ class Locale
             $this->items[$text] = $text;
         }
 
-        /** @var string */
         return $this->items[$text];
     }
 
@@ -88,31 +87,47 @@ class Locale
     /**
      * Converts the data into dot notation values.
      *
-     * @param array<string, mixed> $data
-     * @param array<string, mixed> $result
-     * @param string               $key
+     * @param array<string, array<string, string>> $data
      *
-     * @return array<string, mixed>
+     * @return array<string, string>
      */
-    protected function parse(array $data, $result = array(), $key = '')
+    protected function parse(array $data)
     {
-        foreach ($data as $name => $value)
+        $rows = array();
+
+        $item = array('data' => $data, 'key' => '');
+
+        $stack = array($item);
+
+        while ($stack)
         {
-            $field = $key . $name;
+            $current = array_pop($stack);
 
-            if (! is_array($value))
+            $items = $current['data'];
+
+            $prefix = $current['key'];
+
+            foreach ($items as $name => $value)
             {
-                $result[$field] = $value;
+                $field = $prefix . $name;
 
-                continue;
+                if (! is_array($value))
+                {
+                    $rows[$field] = $value;
+
+                    continue;
+                }
+
+                // Put item to stack for compute ---
+                $item = array('data' => $value);
+
+                $item['key'] = $field . '.';
+
+                $stack[] = $item;
+                // ---------------------------------
             }
-
-            $output = $this->parse($value, $result, $field . '.');
-
-            /** @var array<string, mixed> */
-            $result = array_merge($result, $output);
         }
 
-        return $result;
+        return $rows;
     }
 }

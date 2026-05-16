@@ -2,6 +2,11 @@
 
 All notable changes to `Transcribe` will be documented in this file.
 
+## [0.4.0](https://github.com/rougin/transcribe/compare/v0.4.0...v0.4.1) - Unreleased
+
+### Changed
+- Flattened array logic in `Locale::parse`
+
 ## [0.4.0](https://github.com/rougin/transcribe/compare/v0.3.1...v0.4.0) - 2025-03-23
 
 > [!WARNING]
